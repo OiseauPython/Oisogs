@@ -1,0 +1,46 @@
+@use '@/assets/variables.scss' as *;
+
+@font-face {
+  font-family: 'Poppins'; // Le nom que tu veux utiliser
+  src: url('@/assets/fonts/Poppins/Poppins-regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; // Meilleure performance de chargement
+}
+@font-face {
+  font-family: 'Poppins-Bold'; // Le nom que tu veux utiliser
+  src: url('@/assets/fonts/Poppins/Poppins-bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; // Meilleure performance de chargement
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: $color-text;
+  background: $color-background;
+  position: relative;
+  transition:
+    color 0.5s,
+    background-color 0.5s;
+  line-height: 1.6;
+  font-family:
+    Poppins,
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+  font-size: 15px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
