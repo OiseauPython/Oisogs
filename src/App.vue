@@ -1,4 +1,5 @@
 <template>
+  <div class="bg"></div>
   <div class="wrapper">
     <NavBar />
     <section class="dashboard">
@@ -18,9 +19,6 @@ import NavBar from './components/NavBar.vue'
 .wrapper {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  max-height: 100vh;
-  overflow-x: hidden;
 
   .dashboard {
     width: 100%;

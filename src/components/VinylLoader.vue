@@ -17,8 +17,8 @@ defineProps({
 <style lang="scss" scoped>
 .vinyl-container {
   position: absolute;
-  bottom: -20rem;
-  height: 40rem;
+  bottom: -30rem;
+  height: 60rem;
   right: 1rem;
   width: 50%;
 
@@ -32,9 +32,6 @@ defineProps({
   &.is-spinning .vinyl_loader {
     animation-play-state: running;
     transform: rotate(-0.3turn);
-  }
-  &:hover .vinyl_loader {
-    transform: scale(1.02);
   }
 }
 

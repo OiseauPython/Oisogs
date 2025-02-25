@@ -15,16 +15,18 @@
   font-display: swap; // Meilleure performance de chargement
 }
 
-body {
+html {
+  font-size: 62.5%;
   min-height: 100vh;
-  margin: 0;
+}
+
+body {
+  margin: 0 3rem 3rem;
   color: $color-text;
-  background: $color-background;
   position: relative;
   transition:
     color 0.5s,
     background-color 0.5s;
-  line-height: 1.6;
   font-family:
     Poppins,
     Inter,
@@ -39,8 +41,18 @@ body {
     'Droid Sans',
     'Helvetica Neue',
     sans-serif;
-  font-size: 15px;
+  font-size: 1.6rem;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: $background;
 }

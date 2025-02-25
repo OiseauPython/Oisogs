@@ -20,7 +20,6 @@
 <style lang="scss">
 @media (min-width: 920px) {
   .about {
-    min-height: 100vh;
     display: flex;
     align-items: center;
   }

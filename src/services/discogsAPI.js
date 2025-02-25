@@ -76,9 +76,11 @@ export const discogsApi = {
         hasNextPage = page < data.pagination.pages
         page++
 
-        await new Promise((resolve) => setTimeout(resolve, 1000))
+        let restrictionTimer = data.pagination.pages > 29 ? 2000 : 0
+        console.log('restrictionTimer : ', data.pagination.pages, restrictionTimer)
+        await new Promise((resolve) => setTimeout(resolve, restrictionTimer))
       } catch (error) {
-        throw error // Propager l'erreur déjà formatée
+        throw error
       }
     }
 

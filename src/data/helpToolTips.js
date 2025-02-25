@@ -1,5 +1,5 @@
-// src/data/tooltips.js
-export const tooltips = {
+// src/data/helpToolTips.js
+export const helpToolTips = {
   yearGraph: {
     title: 'Répartition par années',
     description: 'Affiche la distribution de votre collection par année de sortie',

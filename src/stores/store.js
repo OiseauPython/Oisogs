@@ -18,10 +18,30 @@ export const useDiscogsStore = defineStore('discogs', {
   }),
 
   actions: {
+    // Action pour récupérer le profil utilisateur
+    async fetchUserProfile(username) {
+      this.isLoading = true
+      this.error = null
+
+      try {
+        const profile = await discogsApi.userProfile(username)
+        this.userProfile = profile
+      } catch (error) {
+        this.error = error.message
+      } finally {
+        this.isLoading = false
+      }
+    },
+
     // Action pour récupérer la collection complète
     async fetchCollection(username) {
       this.isLoading = true
       this.error = null
+      this.progress = {
+        current: 0,
+        currentPage: 0,
+        totalPages: this.userProfile ? Math.ceil(this.userProfile.num_collection / 100) : 0,
+      }
 
       try {
         const onProgress = (progress, currentPage, totalPages) => {
@@ -34,21 +54,7 @@ export const useDiscogsStore = defineStore('discogs', {
 
         const collection = await discogsApi.getAllCollection(username, onProgress)
         this.collection = collection
-      } catch (error) {
-        this.error = error.message
-      } finally {
-        this.isLoading = false
-      }
-    },
-
-    // Action pour récupérer le profil utilisateur
-    async fetchUserProfile(username) {
-      this.isLoading = true
-      this.error = null
-
-      try {
-        const profile = await discogsApi.userProfile(username)
-        this.userProfile = profile
+        this.progress.current = 100
       } catch (error) {
         this.error = error.message
       } finally {
@@ -107,12 +113,20 @@ export const useDiscogsStore = defineStore('discogs', {
     // Statistiques calculées à partir de la collection
     statistics: (state) => {
       if (!state.collection.length) return null
-
+      console.log(state.collection)
+      console.log(state.userProfile)
+      console.log('word cloud', statsService.analyzeAlbumTitles(state.collection))
       return {
-        totalAlbums: state.collection.length,
+        totalAlbums: state.userProfile.num_collection,
         uniqueArtists: statsService.calculateArtistsCount(state.collection),
+        style: statsService.calculateStyleStats(state.collection),
         genre: statsService.calculateGenreStats(state.collection),
         releaseByDecade: statsService.calculateReleaseYearStats(state.collection),
+        addedPerYear: statsService.calculateAddedPerYearStats(state.collection),
+        addedPerYearAndFormat: statsService.calculateAddedPerYearAndFormatStats(state.collection),
+        bestArtists: statsService.calculateBestArtistsStats(state.collection),
+        lastAddedAlbums: statsService.calculateLastAddedAlbumsStats(state.collection),
+        albumWordCloud: statsService.analyzeAlbumTitles(state.collection),
       }
     },
   },

@@ -21,28 +21,28 @@ const showTooltip = ref(false)
 </script>
 
 <style lang="scss" scoped>
+@use '@/assets/variables.scss' as *;
+
 .tool-tip {
   $icon-size: 20px;
   $primary-color: #27b1f0;
   $bg-color: #262626;
   $accent-color: #fa00f3;
 
-  display: inline-block;
-  position: relative;
-  margin-left: 0.5em;
+  position: absolute;
+  right: 3rem;
+  top: 2rem;
 
   &__icon {
     background: $primary-color;
-    border-radius: 50%; // plus moderne que 10px pour un cercle parfait
+    border-radius: $round-radius;
     cursor: pointer;
     display: inline-block;
-    font-style: italic;
-    font-family: 'Times New Roman', Times, serif;
     height: $icon-size;
     line-height: 1.3em;
     text-align: center;
     width: $icon-size;
-    transition: background-color 0.2s ease; // animation douce
+    transition: background-color 0.2s ease;
 
     &:hover {
       background-color: white;

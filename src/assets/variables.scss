@@ -1,10 +1,26 @@
 // variables.scss
-$background: linear-gradient(130deg, rgba(1,35,64,1) 22%, rgba(39,140,140,1) 80%, rgba(39,140,140,1) 012340%);
+$background: linear-gradient(
+  to right bottom,
+  #151a5a,
+  #1c1962,
+  #241769,
+  #2d1470,
+  #370f76,
+  #4c066c,
+  #5a0062,
+  #640058,
+  #680040,
+  #66002b,
+  #5e0017,
+  #540000
+);
 $color-background: #012340;
 $color-background-light: #164059;
-$color-accent: #F2EC9B;
-$color-accent-secondary: #278C8C;
-$color-grey: #5D7A8C;
+$color-accent: #f2ec9b;
+$color-accent-secondary: #278c8c;
+$color-grey: #5d7a8c;
 $color-text: #fff;
 
 $font-size-base: 16px;
+$card-radius: 4rem;
+$round-radius: 50rem;
