@@ -1,31 +1,34 @@
 <template>
   <div>
     <div class="presentation">
-      <!-- Section Recherche -->
-      <form v-if="!store.collection.length && !store.isLoading" @submit.prevent="handleSearch">
-        <input
-          type="text"
-          v-model="searchValue"
-          placeholder="Rechercher..."
-          :disabled="store.isLoading"
-        />
-        <button type="submit" :disabled="store.isLoading || !isSearchValid">
-          <img src="@/assets/img/right-arrow.svg" alt="" />
-        </button>
-      </form>
-
-      <!-- Infos -->
-      <div
-        v-if="store.isLoading || store.error"
-        class="infos-container"
-        :class="{ '--error': store.error }"
-      >
-        <div class="info">
-          <div v-if="store.isLoading" class="loading_info">Récupération de la collection...</div>
-        </div>
-        <div class="error">
-          <div v-if="store.error" class="error-message">
-            {{ store.error }}
+      <div class="input-wrapper">
+        <!-- Section Recherche -->
+        <form v-if="!store.collection.length && !store.isLoading" @submit.prevent="handleSearch">
+          <input
+            type="text"
+            v-model="searchValue"
+            placeholder="Rechercher..."
+            :disabled="store.isLoading"
+          />
+          <button type="submit" :disabled="store.isLoading || !isSearchValid">
+            <img src="@/assets/img/right-arrow.svg" alt="" />
+          </button>
+        </form>
+        <!-- Infos -->
+        <div
+          v-if="store.isLoading || store.error"
+          class="infos-container"
+          :class="{ '--error': store.error }"
+        >
+          <div v-if="store.isLoading" class="info">
+            <span>i</span>
+            <div class="loading_info">Récupération de la collection...</div>
+          </div>
+          <div v-if="store.error" class="error">
+            <span>&#10005;</span>
+            <div class="error-message">
+              {{ store.error }}
+            </div>
           </div>
         </div>
       </div>
@@ -46,10 +49,6 @@
           <div class="profil_highlights">
             <p class="stat_value">{{ store.statistics.uniqueArtists }}</p>
             <p class="stat_suffix">Artistes</p>
-          </div>
-          <div class="profil_highlights">
-            <p class="stat_value">{{ Object.values(store.statistics.genre ?? {}).length }}</p>
-            <p class="stat_suffix">Genres</p>
           </div>
           <div class="profil_highlights">
             <p class="stat_value">{{ Object.values(store.statistics.style ?? {}).length }}</p>
@@ -89,6 +88,7 @@
         class="graph-genre"
       />
       <LastAdded :last-added-albums="store.statistics.lastAddedAlbums" />
+      <FunFact :collection="store.userCollection" />
       <BarStatsGraph
         :labels="store.statistics.addedPerYear.map((item) => item.year)"
         :values="store.statistics.addedPerYear.map((item) => item.count)"
@@ -96,13 +96,16 @@
         variant="gradient"
         :is-tool-tip="false"
       />
-      <WordCloud :words="store.statistics.albumWordCloud" />
-      <SimpleInfoBlock
+      <WordCloud title="Nuage des titres d'album" :words="store.statistics.albumWordCloud" />
+      <div class="word-cloud-styles">
+        <WordCloud title="Nuage des styles" :words="store.statistics.style" />
+      </div>
+      <!-- <SimpleInfoBlock
         title="Nombre de genres différents"
         :value="Object.values(store.statistics.genre ?? {}).length"
         suffix="Genres"
         variant="secondary"
-      />
+      /> -->
     </div>
   </div>
 </template>
@@ -118,12 +121,11 @@ import VinylLoader from '@/components/VinylLoader.vue'
 import TopArtists from '@/components/TopArtists.vue'
 import LastAdded from '@/components/LastAdded.vue'
 import WordCloud from '@/components/WordCloud.vue'
+import FunFact from '@/components/FunFact.vue'
 
 const store = useDiscogsStore()
 const searchValue = ref('')
 const lastSearchTime = ref(0)
-const labels = null
-const values = null
 
 // Validations
 const isSearchValid = computed(() => {
@@ -158,14 +160,10 @@ const handleSearch = async () => {
 
 <style lang="scss" scoped>
 @use '@/assets/variables.scss' as *;
+@use '@/assets/mixin.scss' as *;
 
 .presentation {
-  background: rgba(255, 255, 255, 0.16);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5.1px);
-  -webkit-backdrop-filter: blur(5.1px);
-  border-radius: $card-radius;
-  padding: 3rem;
+  @include card-background;
   flex: 1;
   height: 30rem;
   overflow: hidden;
@@ -185,10 +183,11 @@ const handleSearch = async () => {
       line-height: 6rem;
       font-family: Poppins-Bold;
       .profil_username {
-        font-weight: 600;
-        font-size: 52px;
+        font-weight: 900;
         text-transform: capitalize;
-        color: cornflowerblue;
+        background: $gradient;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
       }
     }
     .profil_highlights-container {
@@ -208,74 +207,116 @@ const handleSearch = async () => {
     }
   }
 
-  .infos-container {
-    border: rgba(255, 255, 255, 0.2) dashed 2px;
-    padding: 1rem;
-    margin-top: 2rem;
-    border-radius: 1.2rem;
-    &.--error {
-      border: rgba(215, 52, 52, 0.5) dashed 2px;
-    }
-    .error {
-      color: rgb(215, 52, 52);
-    }
-    .info {
-    }
-  }
-
-  form {
+  .input-wrapper {
+    min-width: 18rem;
+    width: 40%;
+    max-width: 35rem;
     position: relative;
-    input {
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: $round-radius;
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
-      transition: 0.1s ease-in-out;
-      padding: 0 2rem;
-      outline: none;
-      border: none;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-      font-size: 2rem;
-      height: 5rem;
-    }
-
-    input:focus {
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
-      transition: all 0.2s ease;
-    }
-
-    input::placeholder {
-      color: #bfbfbf;
-    }
-
-    button {
+    .infos-container {
       position: absolute;
-      height: 4rem;
-      width: 4rem;
-      border-radius: $round-radius;
-      margin: 5px;
-      padding: unset;
-      left: 26.1rem;
-      border: none;
-      &:focus,
-      &:hover {
-        background-color: blue;
-        transition: all 0.1s ease;
-        img {
-          filter: invert(100%);
+      top: calc(50% - 4.5rem);
+      left: 0;
+      border: rgba(255, 255, 255, 0.2) dashed 2px;
+      padding: 1rem;
+      margin-top: 2rem;
+      border-radius: 1.2rem;
+      width: 100%;
+      box-sizing: border-box;
+      &.--error {
+        border: rgba(221, 37, 37, 0.5) dashed 2px;
+        position: absolute;
+        top: calc(50% + 2rem);
+      }
+      .error,
+      .info {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1rem;
+      }
+      .error {
+        color: rgb(221, 37, 37);
+
+        span {
+          color: rgb(200, 200, 200);
+          background-color: rgb(221, 37, 37);
         }
       }
+      .info {
+        color: rgb(200, 200, 200);
+        span {
+          color: #000;
+          background-color: rgb(200, 200, 200);
+        }
+      }
+      span {
+        border-radius: 5rem;
+        height: 1.5rem;
+        min-width: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        font-weight: 700;
+      }
+    }
 
-      img {
-        width: 4.5rem;
-        margin: -0.2rem 0 0 -0.2rem;
+    form {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      input {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: $round-radius;
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        transition: 0.1s ease-in-out;
+        padding: 0 2rem;
+        outline: none;
+        border: none;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        font-size: 2rem;
+        height: 5rem;
+        width: 100%;
+      }
+
+      input:focus {
+        outline: none;
+        box-shadow: 0 6px 12px rgba(107, 127, 255, 0.2);
+        transition: all 0.2s ease;
+      }
+
+      input::placeholder {
+        color: #bfbfbf;
+      }
+
+      button {
+        position: absolute;
+        height: 4rem;
+        width: 4rem;
+        border-radius: $round-radius;
+        margin: 5px;
+        padding: unset;
+        right: 0;
+        border: none;
+        &:focus,
+        &:hover {
+          background-color: blue;
+          transition: all 0.1s ease;
+          img {
+            filter: invert(100%);
+          }
+        }
+
+        img {
+          width: 4.5rem;
+          margin: -0.2rem 0 0 -0.2rem;
+        }
       }
     }
   }
-  .loading_info {
-    margin: 1rem 0;
-    color: #666;
-  }
+
   .loading_bar {
     left: 0;
     right: 0;
@@ -332,6 +373,12 @@ const handleSearch = async () => {
   grid-template-columns: repeat(3, 1fr);
   grid-auto-flow: dense;
   gap: 1rem;
+  :deep(.card-title) {
+    margin: 0.5rem 0;
+    text-align: center;
+    font-size: 1.8rem;
+    font-family: Poppins-Bold;
+  }
   .chart-wrapper {
     grid-column: span 2;
   }
@@ -342,6 +389,15 @@ const handleSearch = async () => {
 
   .graph-genre {
     grid-column: span 3;
+  }
+
+  .fun-fact-wrapper {
+    grid-column: span 3;
+  }
+
+  .word-cloud-styles {
+    grid-column: span 3;
+    height: 30rem;
   }
 }
 

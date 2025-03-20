@@ -31,10 +31,9 @@ export const statsService = {
     })
 
     // Convertir la Map en tableau d'objets
-    const arrayStyles = Array.from(styles, ([name, count]) => ({
-      name,
-      count,
-    })).sort((a, b) => b.count - a.count)
+    const arrayStyles = Array.from(styles)
+      .sort((a, b) => b[1] - a[1])
+      .map(([name, count]) => [name, count])
 
     return arrayStyles
   },
@@ -184,22 +183,16 @@ export const statsService = {
 
     return sortedArtists
   },
-  calculateAdvancedStats(collection) {
-    return {
-      // Albums par note
-      ratings: collection.reduce((acc, item) => {
-        const rating = item.rating || 0
-        acc[rating] = (acc[rating] || 0) + 1
-        return acc
-      }, {}),
+  calculateFormatRepartion(collection) {
+    const formats = {}
+    collection.forEach((item) => {
+      item.basic_information.formats.forEach((format) => {
+        // Si la propriété n'existe pas, on l'initialise à 0, puis on incrémente
+        formats[format.name.toLowerCase()] = (formats[format.name.toLowerCase()] || 0) + 1
+      })
+    })
 
-      // Albums par pays
-      countries: collection.reduce((acc, item) => {
-        const country = item.basic_information.country
-        acc[country] = (acc[country] || 0) + 1
-        return acc
-      }, {}),
-    }
+    return formats
   },
   getFormatColor(format, alpha = 1) {
     const colors = {

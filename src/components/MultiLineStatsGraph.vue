@@ -1,6 +1,9 @@
 <template>
   <div class="chart-wrapper">
-    <InfoIcon v-if="isToolTip" :helpTooltipData="helpToolTips.yearGraph" />
+    <h2 class="card-title">
+      {{ title }}<InfoIcon v-if="isToolTip" :tooltipData="helpToolTips.yearGraph" />
+    </h2>
+    <InfoIcon v-if="isToolTip" :tooltipData="helpToolTips.yearGraph" />
     <div class="chart-container" :style="{ minWidth: `${minWidth}px` }">
       <Line :data="chartData" :options="chartOptions" />
     </div>
@@ -64,14 +67,6 @@ const chartOptions = computed(() => ({
         color: 'rgba(255, 255, 255, 0.8)',
       },
     },
-    title: {
-      display: true,
-      text: props.title,
-      color: 'rgba(255, 255, 255, 0.8)',
-      font: {
-        size: 16,
-      },
-    },
   },
   scales: {
     x: {
@@ -108,14 +103,13 @@ const chartOptions = computed(() => ({
 
 <style lang="scss" scoped>
 @use '@/assets/variables.scss' as *;
+@use '@/assets/mixin.scss' as *;
 
 .chart-wrapper {
   overflow: auto;
-  background: rgba(255, 255, 255, 0.16);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5.1px);
-  -webkit-backdrop-filter: blur(5.1px);
-  border-radius: $card-radius;
+  @include card-background;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .chart-container {

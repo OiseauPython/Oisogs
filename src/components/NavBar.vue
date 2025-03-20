@@ -74,6 +74,7 @@ const handleReset = () => {
 
 <style lang="scss" scoped>
 @use '@/assets/variables.scss' as *;
+@use '@/assets/mixin.scss' as *;
 
 header {
   display: flex;

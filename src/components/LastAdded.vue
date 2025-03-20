@@ -1,5 +1,8 @@
 <template>
   <div class="top-albums-wrapper">
+    <h2 class="card-title">
+      Derniers ajouts <InfoIcon v-if="isToolTip" :tooltipData="helpToolTips.yearGraph" />
+    </h2>
     <div v-for="album in lastAddedAlbums" :key="album.title" class="album-container">
       <img class="album-cover" :src="album.cover" alt="" />
       <div class="album-info">
@@ -24,17 +27,13 @@ defineProps({
 
 <style lang="scss" scoped>
 @use '@/assets/variables.scss' as *;
+@use '@/assets/mixin.scss' as *;
 
 .top-albums-wrapper {
   display: grid;
   grid-template-rows: auto auto;
   align-content: space-between;
-  background: rgba(255, 255, 255, 0.16);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5.1px);
-  -webkit-backdrop-filter: blur(5.1px);
-  border-radius: $card-radius;
-  padding: 3rem;
+  @include card-background;
   .album-container {
     display: grid;
     grid-template-columns: 6.5rem auto;

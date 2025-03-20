@@ -1,19 +1,6 @@
 // variables.scss
-$background: linear-gradient(
-  to right bottom,
-  #151a5a,
-  #1c1962,
-  #241769,
-  #2d1470,
-  #370f76,
-  #4c066c,
-  #5a0062,
-  #640058,
-  #680040,
-  #66002b,
-  #5e0017,
-  #540000
-);
+$background: #1e293b;
+$gradient: linear-gradient(110deg, #ff881a, #ff008c, #1457ff);
 $color-background: #012340;
 $color-background-light: #164059;
 $color-accent: #f2ec9b;
@@ -24,3 +11,24 @@ $color-text: #fff;
 $font-size-base: 16px;
 $card-radius: 4rem;
 $round-radius: 50rem;
+
+// Couleurs principales
+$color-primary: #9d4edd;
+$color-secondary: #ff6b6b;
+$color-tertiary: #00b4d8;
+
+// Accents et variations
+$color-primary-light: #c77dff;
+$color-primary-dark: #7b2cbf;
+$color-secondary-light: #ff9e9e;
+$color-secondary-dark: #e63946;
+
+// Pour le texte et éléments UI
+$color-text-light: #f8f9fa;
+$color-text-dark: #212529;
+$color-text-muted: rgba(255, 255, 255, 0.7);
+
+// Pour les cartes et surfaces
+$card-bg: rgba(255, 255, 255, 0.08);
+$card-bg-hover: rgba(255, 255, 255, 0.12);
+$card-border: rgba(255, 255, 255, 0.1);

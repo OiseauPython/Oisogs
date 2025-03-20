@@ -43,6 +43,7 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 @use '@/assets/variables.scss' as *;
+@use '@/assets/mixin.scss' as *;
 
 .stat-card {
   padding: 1rem;

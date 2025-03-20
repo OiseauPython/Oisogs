@@ -15,10 +15,22 @@ import NavBar from './components/NavBar.vue'
 
 <style lang="scss" scoped>
 @use '@/assets/variables.scss' as *;
+@use '@/assets/mixin.scss' as *;
+
+.bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
 
 .wrapper {
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 1;
 
   .dashboard {
     width: 100%;
@@ -27,6 +39,7 @@ import NavBar from './components/NavBar.vue'
 
 @media (min-width: 920px) {
   .wrapper {
+    /* Vos styles ici */
   }
 }
 </style>

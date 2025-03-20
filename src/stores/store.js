@@ -110,6 +110,7 @@ export const useDiscogsStore = defineStore('discogs', {
     collectionSize: (state) => state.collection.length,
     isCollectionEmpty: (state) => state.collection.length === 0,
     loadingProgress: (state) => state.progress.current,
+    userCollection: (state) => state.collection,
     // Statistiques calculées à partir de la collection
     statistics: (state) => {
       if (!state.collection.length) return null
@@ -127,6 +128,7 @@ export const useDiscogsStore = defineStore('discogs', {
         bestArtists: statsService.calculateBestArtistsStats(state.collection),
         lastAddedAlbums: statsService.calculateLastAddedAlbumsStats(state.collection),
         albumWordCloud: statsService.analyzeAlbumTitles(state.collection),
+        format: statsService.calculateFormatRepartion(state.collection),
       }
     },
   },

@@ -22,6 +22,7 @@ const showTooltip = ref(false)
 
 <style lang="scss" scoped>
 @use '@/assets/variables.scss' as *;
+@use '@/assets/mixin.scss' as *;
 
 .tool-tip {
   $icon-size: 20px;

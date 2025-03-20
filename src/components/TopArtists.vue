@@ -1,5 +1,6 @@
 <template>
   <div class="top-artists-wrapper">
+    <h2 class="card-title">Top Artistes</h2>
     <div
       v-for="(count, artist, index) in topArtists"
       :key="artist"
@@ -27,14 +28,10 @@ defineProps({
 
 <style lang="scss" scoped>
 @use '@/assets/variables.scss' as *;
+@use '@/assets/mixin.scss' as *;
 
 .top-artists-wrapper {
-  background: rgba(255, 255, 255, 0.16);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5.1px);
-  -webkit-backdrop-filter: blur(5.1px);
-  border-radius: $card-radius;
-  padding: 3rem;
+  @include card-background;
   .artist-container {
     display: grid;
     grid-template-columns: 4.5rem auto;
@@ -63,19 +60,19 @@ defineProps({
     }
     &-rank1 {
       .artist-rank {
-        color: #d5a500;
+        color: #ff881a;
         font-size: 3.1rem;
       }
     }
     &-rank2 {
       .artist-rank {
-        color: #b7b7b7;
+        color: #ff008c;
         font-size: 2.8rem;
       }
     }
     &-rank3 {
       .artist-rank {
-        color: #a17419;
+        color: #1457ff;
         font-size: 2.5rem;
       }
     }

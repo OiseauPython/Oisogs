@@ -1,4 +1,5 @@
 @use '@/assets/variables.scss' as *;
+@use '@/assets/mixin.scss' as *;
 
 @font-face {
   font-family: 'Poppins'; // Le nom que tu veux utiliser
@@ -22,7 +23,7 @@ html {
 
 body {
   margin: 0 3rem 3rem;
-  color: $color-text;
+  color: $color-text-light;
   position: relative;
   transition:
     color 0.5s,
