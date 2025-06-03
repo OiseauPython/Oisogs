@@ -26,9 +26,7 @@ export default defineConfig(({ mode }) => {
     // Configuration des alias pour les imports
     resolve: {
       alias: {
-        '@': fileURLToPath(new URL('./src', import.meta.url)),
-        vue: 'https://esm.sh/vue@3',
-        pinia: 'https://esm.sh/pinia@2.1.7',
+        '@': fileURLToPath(new URL('./src', import.meta.url))
       },
     },
 
@@ -40,10 +38,14 @@ export default defineConfig(({ mode }) => {
             @use "sass:math";
             @use "@/assets/variables" as *;
             @use "@/assets/mixin" as *;
+            $base-url: "";
           `,
         },
       },
     },
+    // Configuration pour les assets statiques
+    publicDir: 'public',
+    assetsInclude: ['**/*.ttf', '**/*.woff', '**/*.woff2'],
 
     // Configuration de la construction
     build: {
@@ -54,16 +56,11 @@ export default defineConfig(({ mode }) => {
       minify: isProduction ? 'terser' : false,
       chunkSizeWarningLimit: 1600,
       rollupOptions: {
-        external: ['vue', 'pinia'],
         output: {
           entryFileNames: 'assets/js/[name]-[hash].js',
           chunkFileNames: 'assets/js/[name]-[hash].js',
-          assetFileNames: 'assets/[ext]/[name]-[hash][ext]',
-          globals: {
-            vue: 'Vue',
-            pinia: 'Pinia'
-          },
-        },
+          assetFileNames: 'assets/[ext]/[name]-[hash][ext]'
+        }
       },
     },
 
