@@ -28,6 +28,7 @@ export default defineConfig(({ mode }) => {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
         vue: 'https://esm.sh/vue@3',
+        pinia: 'https://esm.sh/pinia@2.1.7',
       },
     },
 
@@ -53,13 +54,14 @@ export default defineConfig(({ mode }) => {
       minify: isProduction ? 'terser' : false,
       chunkSizeWarningLimit: 1600,
       rollupOptions: {
-        external: ['vue'],
+        external: ['vue', 'pinia'],
         output: {
           entryFileNames: 'assets/js/[name]-[hash].js',
           chunkFileNames: 'assets/js/[name]-[hash].js',
           assetFileNames: 'assets/[ext]/[name]-[hash][ext]',
           globals: {
             vue: 'Vue',
+            pinia: 'Pinia'
           },
         },
       },
