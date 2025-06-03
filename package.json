@@ -9,6 +9,7 @@
     "predeploy": "npm run build",
     "deploy": "npm run predeploy && gh-pages -d dist",
     "preview": "vite preview",
+    "preview:deploy": "npm run build && vite preview --port 4173",
     "lint": "eslint . --fix",
     "format": "prettier --write src/"
   },
