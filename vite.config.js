@@ -10,11 +10,30 @@ export default defineConfig(({ mode }) => {
   
   // Set base URL for GitHub Pages
   const isProduction = mode === 'production'
-  const base = isProduction ? '/Oisogs/' : '/'
+  // Prioritize VITE_BASE_URL from environment (e.g., .env file or CI variable)
+  // Fallback to '/Oisogs/' for production mode if VITE_BASE_URL is not set
+  // Fallback to '/' for development mode if VITE_BASE_URL is not set
+  const base = env.VITE_BASE_URL || (isProduction ? '/Oisogs/' : '/')
+
+  
+
   
   return {
-    plugins: [vue(), vueJsx()],
+    plugins: [
+      vue(),
+      vueJsx()
+    ],
     base: base,
+    publicDir: 'public',
+    define: {
+      'import.meta.env.BASE_URL': JSON.stringify(base)
+    },
+    server: {
+      host: true,
+      port: 3000,
+      strictPort: true,
+      open: false
+    },
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url))
@@ -36,14 +55,20 @@ export default defineConfig(({ mode }) => {
       assetsDir: 'assets',
       emptyOutDir: true,
       sourcemap: false,
+      minify: isProduction ? 'terser' : false,
+      terserOptions: isProduction ? {
+        compress: {
+          drop_console: true,
+          drop_debugger: true,
+        },
+      } : {},
+      chunkSizeWarningLimit: 1600,
       rollupOptions: {
+        input: fileURLToPath(new URL('./index.html', import.meta.url)),
         output: {
-          manualChunks: {
-            vue: ['vue', 'vue-router', 'pinia']
-          },
-          entryFileNames: 'assets/[name].[hash].js',
-          chunkFileNames: 'assets/[name].[hash].js',
-          assetFileNames: 'assets/[name].[hash].[ext]'
+          entryFileNames: 'assets/[name]-[hash].js',
+          chunkFileNames: 'assets/[name]-[hash].js',
+          assetFileNames: 'assets/[name]-[hash].[ext]'
         }
       }
     },

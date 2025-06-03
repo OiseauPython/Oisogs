@@ -3,7 +3,9 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 
 const router = createRouter({
-  history: createWebHashHistory(import.meta.env.BASE_URL),  // Utilisation de createWebHashHistory pour GitHub Pages
+  // Utilisation de createWebHashHistory pour GitHub Pages
+  // Cela permet d'éviter les problèmes de rafraîchissement de page
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
