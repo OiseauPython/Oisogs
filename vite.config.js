@@ -7,9 +7,12 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   
+  // Configuration pour GitHub Pages
+  const base = mode === 'production' ? '/Oisogs/' : '/';
+  
   return {
     plugins: [vue(), vueJsx()],
-    base: env.VITE_BASE_URL || '/',
+    base: base,
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url))
