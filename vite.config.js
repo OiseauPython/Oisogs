@@ -5,10 +5,12 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
+  // Load environment variables
   const env = loadEnv(mode, process.cwd(), '')
   
-  // Configuration pour GitHub Pages
-  const base = mode === 'production' ? '/Oisogs/' : '/';
+  // Set base URL for GitHub Pages
+  const isProduction = mode === 'production'
+  const base = isProduction ? '/Oisogs/' : '/'
   
   return {
     plugins: [vue(), vueJsx()],
@@ -29,20 +31,19 @@ export default defineConfig(({ mode }) => {
         }
       }
     },
-    define: {
-      'process.env': {}
-    },
     build: {
-      target: 'esnext',
-      sourcemap: false,
       outDir: 'dist',
       assetsDir: 'assets',
       emptyOutDir: true,
+      sourcemap: false,
       rollupOptions: {
         output: {
           manualChunks: {
             vue: ['vue', 'vue-router', 'pinia']
-          }
+          },
+          entryFileNames: 'assets/[name].[hash].js',
+          chunkFileNames: 'assets/[name].[hash].js',
+          assetFileNames: 'assets/[name].[hash].[ext]'
         }
       }
     },
