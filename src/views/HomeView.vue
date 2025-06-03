@@ -42,18 +42,7 @@
           </span>
         </div>
         <div class="profil_highlights-container">
-          <div class="profil_highlights">
-            <p class="stat_value">{{ store.statistics.totalAlbums }}</p>
-            <p class="stat_suffix">Albums</p>
-          </div>
-          <div class="profil_highlights">
-            <p class="stat_value">{{ store.statistics.uniqueArtists }}</p>
-            <p class="stat_suffix">Artistes</p>
-          </div>
-          <div class="profil_highlights">
-            <p class="stat_value">{{ Object.values(store.statistics.style ?? {}).length }}</p>
-            <p class="stat_suffix">Styles</p>
-          </div>
+          <a target="_blank" :href="store.userProfile.uri">Voir le compte discogs</a>
         </div>
       </div>
 
@@ -68,10 +57,20 @@
 
     <!-- Résultats -->
     <div v-if="store.collection.length && !store.error" class="results">
+      <div class="big-number-container">
+        <BigNumber :big-number="store.statistics.totalAlbums" wording="Albums" />
+        <BigNumber :big-number="store.statistics.uniqueArtists" wording="Artistes" />
+        <BigNumber
+          :big-number="Object.values(store.statistics.style ?? {}).length"
+          wording="Styles"
+        />
+      </div>
+
       <TopArtists :top-artists="store.statistics.bestArtists" />
       <MultiLineStatsGraph
         :data="store.statistics.addedPerYearAndFormat"
         title="Évolution des ajouts par format"
+        class="graph-added"
       />
       <LineStatsGraph
         :labels="store.statistics.releaseByDecade.map((item) => item.decade)"
@@ -80,21 +79,29 @@
         variant="gradient"
         :is-tool-tip="true"
       />
-      <LineStatsGraph
-        :labels="store.statistics.genre.map((item) => item.name)"
-        :values="store.statistics.genre.map((item) => item.count)"
-        title="Nombre de genres dans la collection"
-        :is-tool-tip="false"
-        class="graph-genre"
-      />
       <LastAdded :last-added-albums="store.statistics.lastAddedAlbums" />
       <FunFact :collection="store.userCollection" />
+      <SupportGraph
+        :labels="store.statistics.format"
+        :values="store.statistics.format"
+        title="Répartition des supports"
+        :is-tool-tip="false"
+        class="graph-genre-repartition"
+      />
       <BarStatsGraph
         :labels="store.statistics.addedPerYear.map((item) => item.year)"
         :values="store.statistics.addedPerYear.map((item) => item.count)"
         title="Nombre d'ajout dans la collection par années"
         variant="gradient"
         :is-tool-tip="false"
+        class="graph-added-per-year"
+      />
+      <LineStatsGraph
+        :labels="store.statistics.genre.map((item) => item.name)"
+        :values="store.statistics.genre.map((item) => item.count)"
+        title="Nombre de genres dans la collection"
+        :is-tool-tip="false"
+        class="graph-genre"
       />
       <WordCloud title="Nuage des titres d'album" :words="store.statistics.albumWordCloud" />
       <div class="word-cloud-styles">
@@ -122,6 +129,8 @@ import TopArtists from '@/components/TopArtists.vue'
 import LastAdded from '@/components/LastAdded.vue'
 import WordCloud from '@/components/WordCloud.vue'
 import FunFact from '@/components/FunFact.vue'
+import BigNumber from '@/components/BigNumber.vue'
+import SupportGraph from '@/components/SupportGraph.vue'
 
 const store = useDiscogsStore()
 const searchValue = ref('')
@@ -192,17 +201,8 @@ const handleSearch = async () => {
     }
     .profil_highlights-container {
       display: flex;
-      gap: 3rem;
-      p {
-        margin: 0;
-        text-align: center;
-      }
-      .profil_highlights {
-        .stat_value {
-          font-size: 4rem;
-        }
-        .stat_suffix {
-        }
+      a {
+        color: white;
       }
     }
   }
@@ -369,35 +369,80 @@ const handleSearch = async () => {
 
 .results {
   margin-top: 1rem;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-flow: dense;
+  display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   :deep(.card-title) {
     margin: 0.5rem 0;
     text-align: center;
     font-size: 1.8rem;
     font-family: Poppins-Bold;
+    &::after {
+      content: '';
+      display: block;
+      width: 5rem;
+      height: 0.2rem;
+      margin: 0.3rem auto 1rem;
+      background: linear-gradient(90deg, #0088ff, #692fff, #c1498a);
+    }
+  }
+  .big-number-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    .big-number-wrapper {
+      width: 20rem;
+    }
+  }
+  .top-artists-wrapper,
+  .top-albums-wrapper {
+    width: 100%;
+    @media (min-width: 768px) {
+      flex: 0 0 calc(33.333% - 3rem);
+    }
   }
   .chart-wrapper {
-    grid-column: span 2;
+    width: 100%;
+    @media (min-width: 768px) {
+      flex: 0 0 calc(66.666% - 4rem);
+    }
   }
-
-  .stat-card {
-    grid-column: span 1;
-  }
-
-  .graph-genre {
-    grid-column: span 3;
-  }
-
   .fun-fact-wrapper {
-    grid-column: span 3;
+    width: 100%;
+    @media (min-width: 768px) {
+      flex: 0 0 calc(33.333% - 1rem);
+    }
   }
-
+  .chart-wrapper.graph-added-per-year,
   .word-cloud-styles {
-    grid-column: span 3;
+    width: 100%;
+    @media (min-width: 768px) {
+      flex: 0 0 calc(100% - 4rem);
+    }
+  }
+  .word-cloud-container:not(.word-cloud-styles) {
+    width: 100%;
+    @media (min-width: 768px) {
+      flex: 0 0 calc(33.333% - 3rem);
+    }
+  }
+  .graph-genre-repartition {
+    width: 100%;
+    @media (min-width: 768px) {
+      flex: 0 0 calc(66.666% - 4rem);
+    }
+  }
+  .word-cloud-styles {
     height: 30rem;
+    width: 100%;
+    margin-bottom: 3rem;
+    @media (min-width: 768px) {
+      flex: 0 0 100%;
+    }
+    .word-cloud-container {
+      width: calc(100% - 4rem);
+    }
   }
 }
 

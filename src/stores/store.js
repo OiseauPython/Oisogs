@@ -115,8 +115,7 @@ export const useDiscogsStore = defineStore('discogs', {
     statistics: (state) => {
       if (!state.collection.length) return null
       console.log(state.collection)
-      console.log(state.userProfile)
-      console.log('word cloud', statsService.analyzeAlbumTitles(state.collection))
+      console.log(statsService.calculateFormatRepartion(state.collection))
       return {
         totalAlbums: state.userProfile.num_collection,
         uniqueArtists: statsService.calculateArtistsCount(state.collection),

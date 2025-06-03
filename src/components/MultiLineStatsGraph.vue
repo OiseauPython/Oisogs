@@ -30,7 +30,6 @@ const props = defineProps({
   data: {
     type: Object,
     required: true,
-    // Format attendu: { labels: [], datasets: [{ label, data, borderColor, backgroundColor }] }
   },
   title: {
     type: String,
@@ -108,12 +107,12 @@ const chartOptions = computed(() => ({
 .chart-wrapper {
   overflow: auto;
   @include card-background;
-  padding-left: 0;
   padding-right: 0;
 }
 
 .chart-container {
   height: 40rem;
   padding: 1rem;
+  padding-left: 0;
 }
 </style>

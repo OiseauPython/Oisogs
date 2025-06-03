@@ -10,20 +10,33 @@
           <p class="stat-value">{{ fact.value.toFixed(fact.decimals || 2) }}</p>
           <p class="stat-unit">{{ fact.unit }}</p>
         </div>
-        <p class="fact-description">{{ getDescriptionForFact(fact.id) }}</p>
+        <!-- <p class="fact-description">{{ getDescriptionForFact(fact.id) }}</p> -->
       </div>
-
-      <div class="fact-item time-fact">
-        <div class="fact-content time">
-          <p class="stat-value time-value">{{ collectionTime.formatted }}</p>
-          <p class="fact-description">pour écouter toute votre collection</p>
+    </div>
+    <div class="fact-item time-fact">
+      <div class="fact-content time">
+        <div class="time-container">
+          <div class="fact-content">
+            <span class="stat-value">{{ collectionTime.days.value }}</span>
+            <span class="stat-unit">{{ collectionTime.days.label }}</span>
+          </div>
+          <div class="fact-content">
+            <span class="stat-value">{{ collectionTime.hours.value }}</span>
+            <span class="stat-unit">{{ collectionTime.hours.label }}</span>
+          </div>
+          <div class="fact-content">
+            <span class="stat-value">{{ collectionTime.minutes.value }}</span>
+            <span class="stat-unit">{{ collectionTime.minutes.label }}</span>
+          </div>
         </div>
+        <!-- <p class="fact-description">pour écouter toute votre collection</p> -->
       </div>
     </div>
 
-    <div class="fun-comparison" v-if="showComparison">
+    <!-- <div class="fun-comparison" v-if="showComparison">
+      <p class="didyouknow">Le saviez vous ?</p>
       <p>{{ randomComparison }}</p>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -94,31 +107,20 @@ const collectionTime = computed(() => {
   const minutes = totalMinutes % 60
 
   return {
-    formatted: formatExtendedTime(days, hours, minutes),
-    raw: { days, hours, minutes },
+    days: {
+      value: days,
+      label: days === 1 ? 'jour' : 'jours',
+    },
+    hours: {
+      value: hours,
+      label: hours === 1 ? 'heure' : 'heures',
+    },
+    minutes: {
+      value: minutes,
+      label: minutes === 1 ? 'minute' : 'minutes',
+    },
   }
 })
-
-const formatExtendedTime = (days, hours, minutes) => {
-  const parts = []
-
-  if (days > 0) {
-    parts.push(`${days} ${days === 1 ? 'jour' : 'jours'}`)
-  }
-  if (hours > 0) {
-    parts.push(`${hours} ${hours === 1 ? 'heure' : 'heures'}`)
-  }
-  if (minutes > 0) {
-    parts.push(`${minutes} ${minutes === 1 ? 'minute' : 'minutes'}`)
-  }
-
-  if (parts.length > 2) {
-    return parts.slice(0, -1).join(', ') + ' et ' + parts.slice(-1)
-  } else if (parts.length === 2) {
-    return parts.join(' et ')
-  }
-  return parts[0] || '0 minute'
-}
 
 const collectionHeight = computed(() => {
   const value = calculateValue('height')
@@ -141,7 +143,7 @@ const collectionSurface = computed(() => ({
   id: 'surface',
   value: calculateValue('surface'),
   unit: 'm²',
-  decimals: 2,
+  decimals: 1,
 }))
 
 const collectionWeight = computed(() => ({
@@ -153,7 +155,7 @@ const collectionWeight = computed(() => ({
 
 const facts = computed(() => [
   collectionHeight.value,
-  collectionLength.value,
+  //collectionLength.value,
   collectionSurface.value,
   collectionWeight.value,
 ])
@@ -171,9 +173,9 @@ const getDescriptionForFact = (factId) => {
 // Comparaisons amusantes
 const comparisons = computed(() => [
   `Votre collection de vinyles pèse autant que ${(collectionWeight.value.value / 5).toFixed(1)} chats.`,
-  `Empilés, vos disques atteindraient ${(collectionHeight.value.value / 1.8).toFixed(1)}% de la hauteur d'un humain moyen.`,
-  `Alignés, vos supports occuperaient ${(collectionLength.value.value / 100).toFixed(1)}% d'un terrain de football.`,
-  `Le temps d'écoute de votre collection équivaut à ${(collectionTime.value.raw.days / 7).toFixed(1)} semaines non-stop!`,
+  `Empilés, vos disques atteindraient ${((collectionHeight.value.value / 1.8) * 100).toFixed(1)}% de la hauteur d'un humain moyen.`,
+  `Vos supports occuperaient environ ${((collectionSurface.value.value / 260) * 100).toFixed(1)}% d'un terrain de tennis.`,
+  `Le temps d'écoute de votre collection équivaut à ${(collectionTime.value.days / 7).toFixed(1)} semaines non-stop!`,
 ])
 
 const randomComparison = computed(() => {
@@ -187,53 +189,87 @@ const randomComparison = computed(() => {
 @use '@/assets/mixin.scss' as *;
 
 .fun-fact-wrapper {
-  @include card-background;
-
   .facts-grid {
     display: flex;
     gap: 1.25rem;
-
-    .fact-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 1.25rem 1rem;
-      border-radius: 12px;
-      background-color: rgba(255, 255, 255, 0.05);
-      transition: all 0.3s ease;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+  .fact-item {
+    padding: 1.25rem 1rem;
+    position: relative;
+    .fact-content:not(.time) {
+      align-items: baseline;
+    }
+    .fact-content {
       position: relative;
-      overflow: hidden;
-      .fact-content:not(.time) {
+      .stat-value {
+        font-size: 4rem;
+        line-height: 4rem;
+        font-family: Poppins-Bold;
+        font-style: italic;
+        background: $gradient;
+        font-weight: bolder;
+        letter-spacing: -0.05em;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        padding-right: 1.2rem;
+        margin: 0;
+      }
+
+      .time-value {
+        font-size: 1.5rem;
+      }
+
+      .stat-unit {
+        position: absolute;
+        font-size: 1.6rem;
+        color: rgba(255, 255, 255, 0.8);
+        text-align: center;
+        @include card-background;
+        backdrop-filter: blur(5px);
+        padding: 1rem;
+        border-radius: 1rem;
+        bottom: -4rem;
+        right: -2rem;
+      }
+    }
+
+    &.time-fact {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+  }
+  .time-fact {
+    .fact-content {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      .time-container {
         display: flex;
-        align-items: baseline;
-      }
-      .fact-content {
-        .stat-value {
-          font-family: 'Poppins-Bold', sans-serif;
-          font-size: 3.1rem;
-          margin: 0;
-          background: $gradient;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-
-        .time-value {
-          font-size: 1.5rem;
-        }
-
-        .stat-unit {
-          margin: 0.25rem 0 0.75rem;
+        gap: 1.5rem;
+        > div {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
       }
-
-      &.time-fact {
-        grid-column: 1 / -1;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        padding: 1.5rem;
-      }
+    }
+    .stat-value {
+      font-size: 2.2rem;
+      line-height: 2.6rem;
+    }
+    .stat-unit {
+      font-size: 1.2rem;
+      margin-top: 0.1rem;
     }
   }
 

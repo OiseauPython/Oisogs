@@ -1,6 +1,14 @@
 // variables.scss
 $background: #1e293b;
 $gradient: linear-gradient(110deg, #ff881a, #ff008c, #1457ff);
+$second-gradient: linear-gradient(
+  57deg,
+  rgb(246, 129, 79),
+  rgb(226, 101, 231) 12%,
+  rgb(97, 179, 238) 38%,
+  rgb(28, 208, 182) 70%,
+  rgb(48, 239, 216)
+);
 $color-background: #012340;
 $color-background-light: #164059;
 $color-accent: #f2ec9b;

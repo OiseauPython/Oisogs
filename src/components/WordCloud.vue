@@ -2,6 +2,7 @@
   <div class="word-cloud-container">
     <h2 class="card-title">{{ title }}</h2>
     <vue-wordcloud
+      style="height: 80%; width: 100%"
       :words="words"
       :color="getRandomColor"
       :font-family="'Roboto, sans-serif'"

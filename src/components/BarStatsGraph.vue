@@ -135,7 +135,6 @@ const chartOptions = computed(() => ({
 .chart-wrapper {
   overflow: auto;
   @include card-background;
-  padding-left: 0;
   padding-right: 2rem;
   padding-bottom: 0;
 }
@@ -143,5 +142,6 @@ const chartOptions = computed(() => ({
 .chart-container {
   height: 30rem;
   padding: 1rem;
+  padding-left: 0;
 }
 </style>
