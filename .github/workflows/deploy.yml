@@ -28,9 +28,9 @@ jobs:
         run: npm ci --prefer-offline
 
       - name: Build
+        env:
+          VITE_BASE_URL: /Oisogs/
         run: |
-          echo "NODE_ENV=production" > .env.production
-          echo "VITE_BASE_URL=/Oisogs/" >> .env.production
           npm run build
 
       - name: Deploy to GitHub Pages
