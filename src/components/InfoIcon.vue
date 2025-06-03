@@ -21,8 +21,8 @@ const showTooltip = ref(false)
 </script>
 
 <style lang="scss" scoped>
-@use '@/assets/variables.scss' as *;
-@use '@/assets/mixin.scss' as *;
+// Les imports sont gérés par Vite dans vite.config.js
+
 
 .tool-tip {
   $icon-size: 20px;

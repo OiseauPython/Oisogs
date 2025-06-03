@@ -1,5 +1,5 @@
 // src/assets/mixin.scss
-@use '@/assets/variables.scss' as *;
+// Les variables sont importées via la configuration Vite
 
 @mixin card-background {
   background: rgba(255, 255, 255, 0.07);

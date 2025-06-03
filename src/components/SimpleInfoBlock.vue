@@ -42,8 +42,8 @@ const props = defineProps({
 </script>
 
 <style lang="scss" scoped>
-@use '@/assets/variables.scss' as *;
-@use '@/assets/mixin.scss' as *;
+// Les imports sont gérés par Vite dans vite.config.js
+
 
 .stat-card {
   padding: 1rem;

@@ -15,6 +15,9 @@ defineProps({
 </script>
 
 <style lang="scss" scoped>
+// Les imports sont gérés par Vite dans vite.config.js
+
+
 .vinyl-container {
   position: absolute;
   bottom: -30rem;

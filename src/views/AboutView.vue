@@ -18,6 +18,9 @@
 </template>
 
 <style lang="scss">
+// Les imports sont gérés par Vite dans vite.config.js
+
+
 @media (min-width: 920px) {
   .about {
     display: flex;

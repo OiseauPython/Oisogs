@@ -26,8 +26,8 @@ defineProps({
 </script>
 
 <style lang="scss" scoped>
-@use '@/assets/variables.scss' as *;
-@use '@/assets/mixin.scss' as *;
+// Les imports sont gérés par Vite dans vite.config.js
+
 
 .top-albums-wrapper {
   display: grid;
