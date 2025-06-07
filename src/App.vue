@@ -1,7 +1,7 @@
 <template>
   <div class="bg"></div>
+  <NavBar />
   <div class="wrapper">
-    <NavBar />
     <section class="dashboard">
       <RouterView />
     </section>
@@ -30,15 +30,20 @@ import NavBar from './components/NavBar.vue'
   flex-direction: column;
   position: relative;
   z-index: 1;
+  padding-top: 1rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
 
   .dashboard {
     width: 100%;
+    flex-grow: 1;
   }
 }
 
-@media (min-width: 920px) {
+@media (max-width: 768px) {
+  // Aligné avec le breakpoint de base.scss
   .wrapper {
-    /* Vos styles ici */
+    padding: 1rem 1rem 2rem 1rem;
   }
 }
 </style>

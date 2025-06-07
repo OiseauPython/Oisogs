@@ -17,13 +17,16 @@ defineProps({
 <style lang="scss" scoped>
 // Les imports sont gérés par Vite dans vite.config.js
 
-
 .vinyl-container {
   position: absolute;
   bottom: -30rem;
   height: 60rem;
   right: 1rem;
   width: 50%;
+  @media (max-width: 768px) {
+    z-index: -1;
+    right: 20rem;
+  }
 
   .vinyl_loader {
     height: 100%;

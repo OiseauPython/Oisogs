@@ -21,7 +21,7 @@ html {
 }
 
 body {
-  margin: 0 3rem 3rem;
+  margin: 0 0 3rem;
   color: $color-text-light;
   position: relative;
   transition:
@@ -45,6 +45,9 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  @media (max-width: 768px) {
+    margin: 0 0 1rem;
+  }
 }
 
 .bg {

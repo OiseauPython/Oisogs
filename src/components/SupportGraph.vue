@@ -168,7 +168,6 @@ const chartOptions = computed(() => ({
 <style lang="scss" scoped>
 // Les imports sont gérés par Vite dans vite.config.js
 
-
 .chart-wrapper {
   @include card-background;
 }
@@ -193,7 +192,7 @@ const chartOptions = computed(() => ({
   margin: 0 auto;
   position: relative;
   height: auto;
-  width: 100%;
+  width: 90%;
 
   @media (min-width: 768px) {
     max-width: 50%;

@@ -1,7 +1,6 @@
 // src/assets/mixin.scss
 @use 'variables' as *;
 
-
 @mixin card-background {
   background: rgba(255, 255, 255, 0.07);
   box-shadow:
@@ -11,6 +10,25 @@
   -webkit-backdrop-filter: blur(10px);
   border-radius: $card-radius;
   padding: 1.5rem 2rem 2rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 8px 30px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+  }
+}
+
+@mixin card-background-mobile {
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: $card-radius;
+  padding: 0.5rem 2rem 2rem;
   transition: all 0.3s ease;
 
   &:hover {

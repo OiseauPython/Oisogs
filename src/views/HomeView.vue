@@ -103,7 +103,11 @@
         :is-tool-tip="false"
         class="graph-genre"
       />
-      <WordCloud title="Nuage des titres d'album" :words="store.statistics.albumWordCloud" />
+      <WordCloud
+        class="word-cloud-albums"
+        title="Nuage des titres d'album"
+        :words="store.statistics.albumWordCloud"
+      />
       <div class="word-cloud-styles">
         <WordCloud title="Nuage des styles" :words="store.statistics.style" />
       </div>
@@ -170,7 +174,6 @@ const handleSearch = async () => {
 <style lang="scss" scoped>
 // Les imports sont gérés par Vite dans vite.config.js
 
-
 .presentation {
   @include card-background;
   flex: 1;
@@ -181,6 +184,9 @@ const handleSearch = async () => {
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
+  @media (max-width: 768px) {
+    @include card-background-mobile;
+  }
 
   .profil_card {
     display: flex;
@@ -191,6 +197,11 @@ const handleSearch = async () => {
       width: 50rem;
       line-height: 6rem;
       font-family: Poppins-Bold;
+      @media (max-width: 768px) {
+        font-size: 3.2rem;
+        line-height: 4.5rem;
+        width: auto;
+      }
       .profil_username {
         font-weight: 900;
         text-transform: capitalize;
@@ -212,6 +223,10 @@ const handleSearch = async () => {
     width: 40%;
     max-width: 35rem;
     position: relative;
+    @media (max-width: 768px) {
+      width: 100%;
+      max-width: none;
+    }
     .infos-container {
       position: absolute;
       top: calc(50% - 4.5rem);
@@ -391,15 +406,54 @@ const handleSearch = async () => {
     align-items: center;
     justify-content: space-around;
     width: 100%;
+
     .big-number-wrapper {
       width: 20rem;
+    }
+
+    @media (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding: 1rem;
+
+      .big-number-wrapper {
+        width: 100%;
+        display: flex;
+        margin: 0.5rem 0 0.5rem -1rem;
+
+        &:nth-child(1) {
+          align-items: flex-start;
+        }
+        &:nth-child(2) {
+          align-items: center;
+        }
+        &:nth-child(3) {
+          align-items: flex-end;
+        }
+
+        :deep(.wording) {
+          right: 0rem;
+        }
+        @media (max-width: 340px) {
+          :deep(.number) {
+            font-size: 23vw;
+          }
+          :deep(.wording) {
+            right: 2rem;
+          }
+        }
+      }
     }
   }
   .top-artists-wrapper,
   .top-albums-wrapper {
     width: 100%;
+    height: 45rem;
     @media (min-width: 768px) {
       flex: 0 0 calc(33.333% - 3rem);
+      height: inherit;
     }
   }
   .chart-wrapper {
@@ -427,6 +481,12 @@ const handleSearch = async () => {
       flex: 0 0 calc(33.333% - 3rem);
     }
   }
+  .word-cloud-albums {
+    height: 20rem;
+    @media (min-width: 768px) {
+      height: inherit;
+    }
+  }
   .graph-genre-repartition {
     width: 100%;
     @media (min-width: 768px) {
@@ -434,7 +494,7 @@ const handleSearch = async () => {
     }
   }
   .word-cloud-styles {
-    height: 30rem;
+    height: 45rem;
     width: 100%;
     margin-bottom: 3rem;
     @media (min-width: 768px) {
