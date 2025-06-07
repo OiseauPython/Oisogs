@@ -1,12 +1,10 @@
-const TOKEN = import.meta.env.VITE_DISCOGS_TOKEN
-const BASE_URL = 'https://api.discogs.com'
+const BASE_URL = 'https://tourmaline-valkyrie-c86344.netlify.app/.netlify/functions/discogs-proxy'
 
 // Créer une fonction réutilisable pour les appels API
 // Dans discogsAPI.js
 async function fetchDiscogsAPI(endpoint, options = {}) {
   const defaultHeaders = {
-    Authorization: `Discogs token=${TOKEN}`,
-    'User-Agent': 'VotreApplication/1.0',
+    'User-Agent': 'Oisogs/1.0',
   }
 
   const maxRetries = 3
