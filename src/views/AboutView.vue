@@ -44,6 +44,10 @@
   line-height: 1.6;
   display: flex;
   gap: 2rem;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 0rem;
+  }
 
   h2 {
     font-size: 1.8rem;
