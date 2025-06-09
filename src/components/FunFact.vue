@@ -187,7 +187,6 @@ const randomComparison = computed(() => {
 <style lang="scss" scoped>
 // Les imports sont gérés par Vite dans vite.config.js
 
-
 .fun-fact-wrapper {
   .facts-grid {
     display: flex;
@@ -204,6 +203,8 @@ const randomComparison = computed(() => {
     }
     .fact-content {
       position: relative;
+      display: flex;
+
       .stat-value {
         font-size: 4rem;
         line-height: 4rem;
@@ -223,16 +224,8 @@ const randomComparison = computed(() => {
       }
 
       .stat-unit {
-        position: absolute;
         font-size: 1.6rem;
-        color: rgba(255, 255, 255, 0.8);
-        text-align: center;
-        @include card-background;
-        backdrop-filter: blur(5px);
-        padding: 1rem;
-        border-radius: 1rem;
-        bottom: -4rem;
-        right: -2rem;
+        margin: 0;
       }
     }
 

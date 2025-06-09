@@ -292,8 +292,12 @@ const handleSearch = async () => {
         border: none;
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         font-size: 2rem;
-        height: 5rem;
+        height: 6.5rem;
         width: 100%;
+        color: white;
+        @media (min-width: 768px) {
+          height: 5rem;
+        }
       }
 
       input:focus {
@@ -308,8 +312,8 @@ const handleSearch = async () => {
 
       button {
         position: absolute;
-        height: 4rem;
-        width: 4rem;
+        height: 5.5rem;
+        width: 5.5rem;
         border-radius: $round-radius;
         margin: 5px;
         padding: unset;
@@ -317,16 +321,23 @@ const handleSearch = async () => {
         border: none;
         &:focus,
         &:hover {
-          background-color: blue;
+          background-color: $background;
           transition: all 0.1s ease;
           img {
             filter: invert(100%);
           }
         }
+        @media (min-width: 768px) {
+          height: 4rem;
+          width: 4rem;
+        }
 
         img {
-          width: 4.5rem;
+          width: 6rem;
           margin: -0.2rem 0 0 -0.2rem;
+          @media (min-width: 768px) {
+            width: 4.5rem;
+          }
         }
       }
     }
@@ -450,7 +461,7 @@ const handleSearch = async () => {
   .top-artists-wrapper,
   .top-albums-wrapper {
     width: 100%;
-    height: 45rem;
+    height: 50rem;
     @media (min-width: 768px) {
       flex: 0 0 calc(33.333% - 3rem);
       height: inherit;
@@ -464,6 +475,8 @@ const handleSearch = async () => {
   }
   .fun-fact-wrapper {
     width: 100%;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
     @media (min-width: 768px) {
       flex: 0 0 calc(33.333% - 1rem);
     }

@@ -53,7 +53,7 @@ defineEmits(['close', 'resetCollection'])
 }
 
 .mobile-nav-menu-panel {
-  background-color: #1e293b;
+  background-color: $background;
   width: 28rem;
   height: 28rem;
   padding: 2rem;
