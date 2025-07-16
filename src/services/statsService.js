@@ -38,17 +38,13 @@ export const statsService = {
     return arrayStyles
   },
   calculateAddedPerYearStats(collection) {
-    // 1. Créer une Map pour compter les occurrences par année
     const years = new Map()
 
-    // 2. Parcourir la collection et compter les années
     collection.forEach((item) => {
       const year = new Date(item.date_added).getFullYear()
-      // Si l'année existe, incrémenter le compteur, sinon initialiser à 1
       years.set(year, (years.get(year) || 0) + 1)
     })
 
-    // 3. Convertir la Map en tableau d'objets
     const addedPerYearArray = Array.from(years, ([year, count]) => ({
       year,
       count,
@@ -57,7 +53,6 @@ export const statsService = {
     return addedPerYearArray
   },
   calculateAddedPerYearAndFormatStats(collection) {
-    // 1. Créer un objet pour stocker les données par format
     const formatYears = {
       Vinyl: new Map(),
       CD: new Map(),
@@ -66,20 +61,15 @@ export const statsService = {
       Other: new Map(),
     }
 
-    // 2. Parcourir la collection et compter par année et par format
     collection.forEach((item) => {
       const year = new Date(item.date_added).getFullYear()
-      // Récupérer le vrai format depuis l'item
       const format = item.basic_information.formats?.[0]?.name || 'Other'
 
-      // Vérifier si le format existe, sinon mettre dans Other
       const formatKey = formatYears.hasOwnProperty(format) ? format : 'Other'
 
-      // Incrémenter le compteur pour ce format et cette année
       formatYears[formatKey].set(year, (formatYears[formatKey].get(year) || 0) + 1)
     })
 
-    // 3. Transformer les données pour le graphique
     const allYears = new Set()
     Object.values(formatYears).forEach((formatMap) => {
       formatMap.forEach((_, year) => allYears.add(year))
@@ -114,13 +104,10 @@ export const statsService = {
       .slice(1)
     return releaseByDecadeArray
   },
-  calculateLastAddedAlbumsStats(collection, limit = 5) {
-    // 1. Trier la collection par date d'ajout (du plus récent au plus ancien)
+  calculateLastAddedAlbumsStats(collection, limit = 50) {
     const sortedAlbums = [...collection].sort((a, b) => {
       return new Date(b.date_added) - new Date(a.date_added)
     })
-
-    // 2. Prendre les 5 premiers et formater les données
     return sortedAlbums.slice(0, limit).map((album) => ({
       id: album.id,
       artist: album.basic_information.artists[0].name,
@@ -163,31 +150,33 @@ export const statsService = {
   calculateBestArtistsStats(collection) {
     const artists = new Map()
     collection.forEach((item) => {
-      // Prend en compte tous les artistes d'une release
       item.basic_information.artists.forEach((artist) => {
         artists.set(artist.name, (artists.get(artist.name) || 0) + 1)
       })
     })
 
-    // Trier les résultats par nombre d'occurrences
-    const sortedArtists = [...artists.entries()]
-      .sort(([, a], [, b]) => b - a)
-      .slice(0, 10)
-      .reduce(
-        (obj, [key, value]) => ({
-          ...obj,
-          [key]: value,
-        }),
-        {},
-      )
+    const allArtists = [...artists.entries()].sort(([, a], [, b]) => b - a)
 
-    return sortedArtists
+    let topArtists = allArtists.filter(([, count]) => count >= 2)
+
+    if (topArtists.length < 10) {
+      const needed = 10 - topArtists.length
+      const extraArtists = allArtists.filter((a) => !topArtists.includes(a)).slice(0, needed)
+      topArtists.push(...extraArtists)
+      topArtists.sort(([, a], [, b]) => b - a)
+    }
+
+    const finalArtists = topArtists.slice(0, 50).reduce((obj, [key, value]) => {
+      obj[key] = value
+      return obj
+    }, {})
+
+    return finalArtists
   },
   calculateFormatRepartion(collection) {
     const formats = {}
     collection.forEach((item) => {
       item.basic_information.formats.forEach((format) => {
-        // Si la propriété n'existe pas, on l'initialise à 0, puis on incrémente
         formats[format.name.toLowerCase()] = (formats[format.name.toLowerCase()] || 0) + 1
       })
     })

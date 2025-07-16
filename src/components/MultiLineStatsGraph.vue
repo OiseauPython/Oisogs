@@ -103,7 +103,6 @@ const chartOptions = computed(() => ({
 <style lang="scss" scoped>
 // Les imports sont gérés par Vite dans vite.config.js
 
-
 .chart-wrapper {
   overflow: auto;
   @include card-background;
@@ -111,7 +110,7 @@ const chartOptions = computed(() => ({
 }
 
 .chart-container {
-  height: 40rem;
+  height: 46rem;
   padding: 1rem;
   padding-left: 0;
 }

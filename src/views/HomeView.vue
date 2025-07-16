@@ -458,15 +458,7 @@ const handleSearch = async () => {
       }
     }
   }
-  .top-artists-wrapper,
-  .top-albums-wrapper {
-    width: 100%;
-    height: 50rem;
-    @media (min-width: 768px) {
-      flex: 0 0 calc(33.333% - 3rem);
-      height: inherit;
-    }
-  }
+
   .chart-wrapper {
     width: 100%;
     @media (min-width: 768px) {
