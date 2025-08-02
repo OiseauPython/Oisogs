@@ -1,31 +1,32 @@
 <template>
   <div class="word-cloud-container">
     <h2 class="card-title">{{ title }}</h2>
-    <vue-wordcloud
-      style="height: 80%; width: 100%"
+    <Vue3WordCloud
       :words="words"
-      :color="getRandomColor"
+      :color="color"
       :font-family="'Roboto, sans-serif'"
       :font-size-ratio="5"
       :spacing="0.5"
       :rotation="0"
-      @wordclick="handleWordClick"
-    />
+      style="height: 80%; width: 100%"
+    >
+      <template v-slot="{ text, weight, word }">
+        <div :title="weight" style="cursor: pointer;" @click="handleWordClick(word)">
+          {{ text }}
+        </div>
+      </template>
+    </Vue3WordCloud>
   </div>
 </template>
 
 <script setup>
 import { defineProps, defineEmits } from 'vue'
-import VueWordcloud from 'vuewordcloud'
+import Vue3WordCloud from 'vue3-word-cloud'
 
 const props = defineProps({
   words: {
     type: Array,
     required: true,
-  },
-  maxHeight: {
-    type: Number,
-    default: 200,
   },
   title: {
     type: String,
@@ -35,16 +36,18 @@ const props = defineProps({
 
 const emit = defineEmits(['word-selected'])
 
-const colors = [
-  'rgba(255, 99, 132)',
-  'rgba(54, 162, 235)',
-  'rgba(255, 206, 86)',
-  'rgba(75, 192, 192)',
-  'rgba(255, 255, 255)',
+const appColors = [
+  'rgba(255, 99, 132, 1)',
+  'rgba(54, 162, 235, 1)',
+  'rgba(255, 206, 86, 1)',
+  'rgba(75, 192, 192, 1)',
+  'rgba(153, 102, 255, 1)',
 ]
 
-function getRandomColor() {
-  return colors[Math.floor(Math.random() * colors.length)]
+const color = ([, weight]) => {
+  // Simple example: cycle through colors based on weight
+  const index = Math.floor(weight % appColors.length)
+  return appColors[index]
 }
 
 function handleWordClick(word) {

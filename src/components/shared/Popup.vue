@@ -1,5 +1,10 @@
 <template>
-  <div v-if="visible" class="popup-overlay" :style="{ width: visible ? '100%' : '0' }" @click.self="close">
+  <div
+    v-if="visible"
+    class="popup-overlay"
+    :style="{ width: visible ? '100%' : '0' }"
+    @click.self="close"
+  >
     <div class="popup-container">
       <button class="close-button" @click="close">&times;</button>
       <div class="popup-header">
@@ -29,7 +34,7 @@ const close = () => {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -44,11 +49,7 @@ const close = () => {
 }
 
 .popup-container {
-  background-color: #2c2c2c; /* Dark background */
-  color: #f0f0f0; /* Light text */
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  @include card-background;
   width: 80%;
   max-width: 600px;
   position: relative;
@@ -69,8 +70,8 @@ const close = () => {
 
 .close-button {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 3rem;
+  right: 3rem;
   background: none;
   border: none;
   font-size: 24px;

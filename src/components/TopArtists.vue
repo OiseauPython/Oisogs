@@ -57,7 +57,6 @@ const limitedTopArtists = computed(() => {
 .top-artists-wrapper {
   min-width: 0;
   width: 100%;
-  height: 50rem;
   @media (min-width: 768px) {
     flex-grow: 0;
     flex-shrink: 0;

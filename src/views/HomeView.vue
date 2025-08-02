@@ -109,14 +109,36 @@
         :words="store.statistics.albumWordCloud"
       />
       <div class="word-cloud-styles">
-        <WordCloud title="Nuage des styles" :words="store.statistics.style" />
+        <WordCloud
+          title="Nuage des styles"
+          :words="store.statistics.style"
+          @word-selected="handleStyleSelected"
+        />
+        <Popup
+          v-if="isAlbumsByStylePopupVisible"
+          :visible="isAlbumsByStylePopupVisible"
+          @close="isAlbumsByStylePopupVisible = false"
+        >
+          <template #header>
+            <h3>Albums {{ selectedStyle }}</h3>
+          </template>
+          <template #default>
+            <div class="style-albums-list">
+              <div v-for="album in albumsForSelectedStyle" :key="album.id" class="album-item">
+                <img
+                  :src="album.basic_information.cover_image"
+                  alt="Pochette de l'album"
+                  class="album-cover"
+                />
+                <div class="album-info">
+                  <p class="album-title">{{ album.basic_information.title }}</p>
+                  <p class="album-artist">{{ album.basic_information.artists[0].name }}</p>
+                </div>
+              </div>
+            </div>
+          </template>
+        </Popup>
       </div>
-      <!-- <SimpleInfoBlock
-        title="Nombre de genres différents"
-        :value="Object.values(store.statistics.genre ?? {}).length"
-        suffix="Genres"
-        variant="secondary"
-      /> -->
     </div>
   </div>
 </template>
@@ -124,7 +146,6 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useDiscogsStore } from '@/stores/store'
-import SimpleInfoBlock from '@/components/SimpleInfoBlock.vue'
 import LineStatsGraph from '@/components/LineStatsGraph.vue'
 import MultiLineStatsGraph from '@/components/MultiLineStatsGraph.vue'
 import BarStatsGraph from '@/components/BarStatsGraph.vue'
@@ -133,6 +154,7 @@ import TopArtists from '@/components/TopArtists.vue'
 import LastAdded from '@/components/LastAdded.vue'
 import WordCloud from '@/components/WordCloud.vue'
 import FunFact from '@/components/FunFact.vue'
+import Popup from '@/components/shared/Popup.vue'
 import BigNumber from '@/components/BigNumber.vue'
 import SupportGraph from '@/components/SupportGraph.vue'
 
@@ -140,13 +162,28 @@ const store = useDiscogsStore()
 const searchValue = ref('')
 const lastSearchTime = ref(0)
 
-// Validations
+const isAlbumsByStylePopupVisible = ref(false)
+const selectedStyle = ref('')
+const albumsForSelectedStyle = ref([])
+
 const isSearchValid = computed(() => {
   const query = searchValue.value.trim()
   return query && query.length <= 50
 })
 
-// Gestionnaire de recherche
+const handleStyleSelected = (word) => {
+  const styleName = word[0]
+  selectedStyle.value = styleName
+  albumsForSelectedStyle.value = store.collection.filter((album) =>
+    album.basic_information.styles?.includes(styleName),
+  )
+  isAlbumsByStylePopupVisible.value = true
+}
+
+const closeAlbumsByStylePopup = () => {
+  isAlbumsByStylePopupVisible.value = false
+}
+
 const handleSearch = async () => {
   const now = Date.now()
   if (now - lastSearchTime.value < 3000) {
@@ -207,6 +244,7 @@ const handleSearch = async () => {
         text-transform: capitalize;
         background: $gradient;
         -webkit-background-clip: text;
+        background-clip: text;
         -webkit-text-fill-color: transparent;
       }
     }
@@ -478,6 +516,41 @@ const handleSearch = async () => {
     width: 100%;
     @media (min-width: 768px) {
       flex: 0 0 calc(100% - 4rem);
+    }
+
+    //POPUP
+    .style-albums-list {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-around;
+      .album-item {
+        display: grid;
+        grid-template-columns: 6.5rem auto;
+        gap: 3rem;
+        align-items: center;
+        min-width: 100%;
+        @media (min-width: 768px) {
+          width: min-content;
+        }
+        .album-info {
+          min-width: auto;
+          @media (min-width: 768px) {
+            min-width: 19rem;
+          }
+          .album-artist {
+            margin-top: 0;
+          }
+          .album-title {
+            margin-bottom: 0;
+          }
+        }
+        .album-cover {
+          width: 8rem;
+          border-radius: 0.5rem;
+        }
+      }
     }
   }
   .word-cloud-container:not(.word-cloud-styles) {
