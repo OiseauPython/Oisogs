@@ -52,7 +52,7 @@
 
 <script setup>
 import { ref, onMounted, watch, nextTick, onBeforeUnmount } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { RouterLink } from 'vue-router'
 import { useDiscogsStore } from '@/stores/store'
 import BurgerButton from './BurgerButton.vue'
@@ -60,6 +60,7 @@ import MobileNavMenu from './MobileNavMenu.vue'
 
 const store = useDiscogsStore()
 const route = useRoute()
+const router = useRouter()
 const linkRefs = ref([])
 const indicatorPosition = ref(0)
 const indicatorWidth = ref(0)
@@ -68,9 +69,9 @@ const isMobile = ref(false)
 const isMobileMenuOpen = ref(false)
 
 const links = [
-  { path: '/', name: 'Home' },
+  { path: '/', name: 'Collection' },
+  { path: '/randomize', name: 'Aléatoire' },
   { path: '/about', name: 'À propos' },
-  { path: '/randomize', name: 'Randomize' },
 ]
 
 const checkScreenSize = () => {
@@ -116,6 +117,7 @@ onBeforeUnmount(() => {
 // Reset
 const handleReset = () => {
   store.resetStore()
+  router.push('/')
 }
 
 const handleResetAndCloseMenu = () => {
