@@ -12,8 +12,7 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [vue()],
 
-    // Base URL pour GitHub Pages
-    base: '/Oisogs/',
+    base: '/',
 
     // Configuration des alias pour les imports
     resolve: {
