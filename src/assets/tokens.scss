@@ -1,0 +1,86 @@
+// Oisogs Design Tokens
+$oi-bg:           #0a1337;
+$oi-bg-elev:      #0f1a4a;
+$oi-bg-panel:     #142055;
+$oi-ink:          #f4ecd7;
+$oi-ink-soft:     #c5b389;
+$oi-mute:         #7a7095;
+$oi-rule:         #1c2150;
+$oi-rule-strong:  #2a3070;
+$oi-accent:       #b78445;
+$oi-accent-soft:  #ffd67e;
+$oi-accent-ink:   #0a1337;
+$oi-cool:         #c69552;
+
+$oi-light-bg:           #faf6ee;
+$oi-light-bg-elev:      #f3edde;
+$oi-light-bg-panel:     #ebe2cb;
+$oi-light-ink:          #0a1337;
+$oi-light-ink-soft:     #2a3070;
+$oi-light-mute:         #8a8170;
+$oi-light-rule:         #d9d0bc;
+$oi-light-rule-strong:  #b8ad96;
+$oi-light-accent:       #8a6232;
+$oi-light-accent-soft:  #b78445;
+$oi-light-accent-ink:   #fff;
+
+$oi-font-display: 'Fraunces', Georgia, serif;
+$oi-font-serif:   'Fraunces', Georgia, serif;
+$oi-font-sans:    'Outfit', system-ui, sans-serif;
+
+$oi-space-1:  4px;
+$oi-space-2:  8px;
+$oi-space-3:  12px;
+$oi-space-4:  16px;
+$oi-space-5:  20px;
+$oi-space-6:  24px;
+$oi-space-8:  32px;
+$oi-space-10: 40px;
+$oi-space-12: 48px;
+$oi-space-16: 64px;
+$oi-space-20: 80px;
+
+$oi-radius-sm: 6px;
+$oi-radius-md: 10px;
+$oi-radius-lg: 14px;
+$oi-radius-xl: 20px;
+
+$oi-bp-mobile:  640px;
+$oi-bp-tablet:  900px;
+$oi-bp-desktop: 1200px;
+
+@mixin oisogs-css-vars {
+  :root {
+    --oisogs-bg:           #{$oi-bg};
+    --oisogs-bg-elev:      #{$oi-bg-elev};
+    --oisogs-bg-panel:     #{$oi-bg-panel};
+    --oisogs-ink:          #{$oi-ink};
+    --oisogs-ink-soft:     #{$oi-ink-soft};
+    --oisogs-mute:         #{$oi-mute};
+    --oisogs-rule:         #{$oi-rule};
+    --oisogs-rule-strong:  #{$oi-rule-strong};
+    --oisogs-accent:       #{$oi-accent};
+    --oisogs-accent-soft:  #{$oi-accent-soft};
+    --oisogs-accent-ink:   #{$oi-accent-ink};
+    --oisogs-cool:         #{$oi-cool};
+    --oisogs-font-display: #{$oi-font-display};
+    --oisogs-font-serif:   #{$oi-font-serif};
+    --oisogs-font-sans:    #{$oi-font-sans};
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --oisogs-bg:           #{$oi-light-bg};
+      --oisogs-bg-elev:      #{$oi-light-bg-elev};
+      --oisogs-bg-panel:     #{$oi-light-bg-panel};
+      --oisogs-ink:          #{$oi-light-ink};
+      --oisogs-ink-soft:     #{$oi-light-ink-soft};
+      --oisogs-mute:         #{$oi-light-mute};
+      --oisogs-rule:         #{$oi-light-rule};
+      --oisogs-rule-strong:  #{$oi-light-rule-strong};
+      --oisogs-accent:       #{$oi-light-accent};
+      --oisogs-accent-soft:  #{$oi-light-accent-soft};
+      --oisogs-accent-ink:   #{$oi-light-accent-ink};
+    }
+  }
+}

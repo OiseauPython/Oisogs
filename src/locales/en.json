@@ -1,0 +1,185 @@
+{
+  "nav": {
+    "search": "Search",
+    "collection": "Collection",
+    "random": "Random",
+    "about": "About",
+    "reset": "Reset"
+  },
+  "search": {
+    "edition": "Edition №01 · 2026",
+    "title1": "Your",
+    "title2": "collection,",
+    "title3": "mapped.",
+    "desc": "Enter your Discogs username. We'll unpack every record, measure its decade, weigh its styles, count its countries — and hand you back a statistical portrait of your shelf.",
+    "input_label": "Discogs username",
+    "input_placeholder": "username",
+    "cta": "Load collection →",
+    "recent_label": "Recent searches",
+    "loading_kicker": "Loading",
+    "loading_text": "Reading {username}, record by record.",
+    "loading_meta": "Fetching from Discogs API",
+    "loading_time": "~30 s",
+    "vinyl_waiting": "Waiting",
+    "vinyl_playing": "Playing",
+    "vinyl_quote": "« A shelf always has something to say. »"
+  },
+  "home": {
+    "s1_kicker": "Section I — The Collection",
+    "s2_kicker": "Section II — Anatomy",
+    "s2_title": "Genre breakdown",
+    "s3_kicker": "Section III — Sub-genres",
+    "s3_title": "The style cloud",
+    "s4_kicker": "Section IV — Decades",
+    "s4_title": "Breakdown by decade",
+    "s5_kicker": "Section V — Artists",
+    "s5_title": "Top artists",
+    "s6_kicker": "Section VI — Recent",
+    "s6_title": "Latest additions",
+    "s7_kicker": "Section VII — Formats",
+    "s7_title": "Format breakdown",
+    "s8_kicker": "Section VIII — Timeline",
+    "s8_title": "Additions by year",
+    "s9_kicker": "Section IX — Evolution",
+    "s9_title": "By format over time",
+    "s10_kicker": "Section X — Vocabulary",
+    "s10_title": "Album title cloud",
+    "s2_dek": "Breakdown by main genre.",
+    "s3_dek": "{n} styles total.",
+    "footer_tagline": "Oisogs · a statistical reading of your Discogs collection",
+    "footer_sync": "Data synced on {date}"
+  },
+  "hero": {
+    "eyebrow": "Section I — The Collection",
+    "member_since": "Member since {year}",
+    "albums_aria": "Number of albums",
+    "albums_word": "albums",
+    "artists_meta": "· {n} artists",
+    "stat_genre": "Top genre",
+    "stat_decade": "Top decade",
+    "stat_style": "Style #1",
+    "stat_artists": "Artists",
+    "stat_artists_sub": "unique",
+    "footer_spread": "across {n} artists",
+    "footer_formats": "and {n} formats",
+    "footer_rate": "Rate:",
+    "footer_per_month": "/ month"
+  },
+  "funfacts": {
+    "stacked": "Stacked",
+    "stacked_sub": "pile height",
+    "weight": "Total weight",
+    "weight_sub": "approx.",
+    "albums": "Albums",
+    "albums_sub": "in the collection",
+    "oldest": "Oldest",
+    "oldest_sub": "first release",
+    "newest": "Newest",
+    "newest_sub": "last release",
+    "rate": "Rate",
+    "rate_unit": "/month",
+    "rate_sub": "average additions",
+    "oldest_popup_kicker": "{year} · {n} album | {year} · {n} albums",
+    "newest_popup_kicker": "{year} · {n} album | {year} · {n} albums"
+  },
+  "decades": {
+    "sparkline_label": "Addition rate · last 24 months",
+    "today": "today"
+  },
+  "artists": {
+    "filter_placeholder": "Filter artists…"
+  },
+  "genres": {
+    "center_label": "Genres"
+  },
+  "styles": {
+    "top10_title": "Top 10 styles",
+    "cloud_note": "Size proportional to album count · {n} styles total",
+    "popup_kicker": "Style · {n} albums"
+  },
+  "years": {
+    "popup_kicker": "{year} · {n} albums added",
+    "peak": "Peak in {year} — {n} albums added that year"
+  },
+  "wordcloud": {
+    "note": "{n} most frequent words in album titles"
+  },
+  "lastadded": {
+    "see_more": "See last 50 →",
+    "popup_kicker": "Latest additions",
+    "popup_title": "Last 50 additions"
+  },
+  "randomize": {
+    "eyebrow": "Random draw",
+    "eyebrow_count": "{n} albums available",
+    "title": "What should I listen to?",
+    "desc": "Let Oisogs pick an album from your collection at random.",
+    "selected_kicker": "Selected album",
+    "stat_year": "Year",
+    "stat_label": "Label",
+    "stat_format": "Format",
+    "loading_kicker": "Loading…",
+    "loading_title": "Drawing…",
+    "redraw": "↺ Draw again",
+    "view_discogs": "View on Discogs ↗",
+    "m1_kicker": "Mode 01",
+    "m1_title": "Free draw",
+    "m1_desc": "Draws from the entire collection, no filter.",
+    "m1_btn": "Draw",
+    "m1_btn_loading": "Drawing…",
+    "m2_kicker": "Mode 02",
+    "m2_title": "By genre",
+    "m2_desc": "Select a genre then draw.",
+    "m2_btn": "Draw from this genre",
+    "m2_btn_loading": "Drawing…",
+    "m3_kicker": "Mode 03",
+    "m3_title": "By style",
+    "m3_desc": "Narrow it down to the sub-genre.",
+    "m3_btn": "Draw from this style",
+    "m3_btn_loading": "Drawing…",
+    "empty_kicker": "Collection not found",
+    "empty_text": "Search for a collection from the {link} page to use the random draw.",
+    "empty_link": "Search",
+    "footer": "Oisogs · Random draw",
+    "footer_last": "Last draw · {title}"
+  },
+  "about": {
+    "kicker": "About — Oisogs",
+    "title": "A statistical reading of your Discogs collection.",
+    "desc": "Oisogs connects to your Discogs profile and turns your albums into a living dashboard: genres, decades, favourite artists, physical fun facts, unified search — everything is computed locally, in your browser.",
+    "f1_kicker": "Feature 01",
+    "f1_title": "Statistics",
+    "f1_desc": "Genres, styles, decades, formats, labels, countries, total value — every dimension of your shelf, put into numbers.",
+    "f2_kicker": "Feature 02",
+    "f2_title": "Random",
+    "f2_desc": "Pick an album at random when you don't know what to listen to. Filtered by genre, decade or format if you wish.",
+    "f3_kicker": "Feature 03",
+    "f3_title": "Search",
+    "f3_desc": "Load any public Discogs collection in seconds.",
+    "stack_label": "Under the hood",
+    "no_tracking": "No tracking",
+    "privacy_kicker": "Privacy",
+    "privacy_title": "Your privacy, first.",
+    "privacy_desc": "Oisogs runs entirely in your browser. No data is sent to a third-party server — not your username, not your collection. Search history is stored locally on your device and never leaves your browser.",
+    "footer_legal": "Oisogs is an independent project, unaffiliated with Discogs.",
+    "footer_credit": "Designed and maintained by OiseauPython."
+  },
+  "install": {
+    "title": "Install Oisogs",
+    "sub_android": "Add the app to your home screen",
+    "sub_ios": "Tap ⬆ then \"Add to Home Screen\"",
+    "btn_install": "Install",
+    "btn_later": "Later"
+  },
+  "popup": {
+    "close": "Close"
+  },
+  "errors": {
+    "wait": "Please wait before starting a new search.",
+    "invalid_username": "Invalid username.",
+    "private": "This collection is private.",
+    "not_found": "User not found.",
+    "rate_limit": "Too many requests — try again in a moment.",
+    "generic": "Something went wrong."
+  }
+}

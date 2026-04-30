@@ -5,7 +5,6 @@ export const statsService = {
     return artists.size
   },
   calculateGenreStats(collection) {
-    // Créer la Map et compter les genres
     const genres = new Map()
     collection.forEach((item) => {
       item.basic_information.genres?.forEach((style) => {
@@ -13,7 +12,6 @@ export const statsService = {
       })
     })
 
-    // Convertir la Map en tableau d'objets
     const arrayGenres = Array.from(genres, ([name, count]) => ({
       name,
       count,
@@ -22,7 +20,6 @@ export const statsService = {
     return arrayGenres
   },
   calculateStyleStats(collection) {
-    // Créer la Map et compter les styles
     const styles = new Map()
     collection.forEach((item) => {
       item.basic_information.styles?.forEach((style) => {
@@ -30,10 +27,7 @@ export const statsService = {
       })
     })
 
-    // Convertir la Map en tableau d'objets
-    const arrayStyles = Array.from(styles)
-      .sort((a, b) => b[1] - a[1])
-      .map(([name, count]) => [name, count])
+    const arrayStyles = Array.from(styles).sort((a, b) => b[1] - a[1])
 
     return arrayStyles
   },
@@ -65,7 +59,7 @@ export const statsService = {
       const year = new Date(item.date_added).getFullYear()
       const format = item.basic_information.formats?.[0]?.name || 'Other'
 
-      const formatKey = formatYears.hasOwnProperty(format) ? format : 'Other'
+      const formatKey = Object.hasOwn(formatYears, format) ? format : 'Other'
 
       formatYears[formatKey].set(year, (formatYears[formatKey].get(year) || 0) + 1)
     })
@@ -75,7 +69,6 @@ export const statsService = {
       formatMap.forEach((_, year) => allYears.add(year))
     })
     const years = Array.from(allYears).sort()
-    // 4. Créer le format final des données
     return {
       labels: years,
       datasets: Object.entries(formatYears).map(([format, yearMap]) => ({
@@ -95,7 +88,6 @@ export const statsService = {
       const decade = Math.floor(year / 10) * 10
       decades.set(decade, (decades.get(decade) || 0) + 1)
     })
-    // Convertir la Map en tableau d'objets
     const releaseByDecadeArray = Array.from(decades, ([decade, count]) => ({
       decade,
       count,
@@ -131,7 +123,7 @@ export const statsService = {
       const title = item.basic_information.title
       const words = title
         .toLowerCase()
-        .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '')
+        .replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, '')
         .split(' ')
         .filter((word) => word.length > 2)
         .filter((word) => !wordsToExclude.includes(word))

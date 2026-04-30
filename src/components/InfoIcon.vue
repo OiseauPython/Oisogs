@@ -8,22 +8,15 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
 defineProps({
   tooltipData: {
     type: Object,
     required: true,
   },
 })
-
-const showTooltip = ref(false)
 </script>
 
 <style lang="scss" scoped>
-// Les imports sont gérés par Vite dans vite.config.js
-
-
 .tool-tip {
   $icon-size: 20px;
   $primary-color: #27b1f0;
