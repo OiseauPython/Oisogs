@@ -1,40 +1,80 @@
 // src/assets/mixin.scss
-@use 'variables' as *;
+@use 'tokens' as *; // fournit $oi-font-sans, $oi-font-serif, $oi-bp-mobile…
 
-@mixin card-background {
-  background: rgba(255, 255, 255, 0.07);
-  box-shadow:
-    0 4px 20px rgba(0, 0, 0, 0.2),
-    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: $card-radius;
-  padding: 1.5rem 2rem 2rem;
-  transition: all 0.3s ease;
+// ─────────────────────────────────────────────────────────────────────────────
+// Mixins actifs — design system Oisogs
+// ─────────────────────────────────────────────────────────────────────────────
 
-  &:hover {
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow:
-      0 8px 30px rgba(0, 0, 0, 0.3),
-      0 0 0 1px rgba(255, 255, 255, 0.15) inset;
-  }
+// Label typographique : petite caps sans-serif, espacé, muet
+// Usage : kickers, étiquettes de section, en-têtes de colonne
+@mixin oi-label($size: 1rem, $spacing: 0.15em) {
+  font-family: $oi-font-sans;
+  font-size: $size;
+  letter-spacing: $spacing;
+  text-transform: uppercase;
+  color: var(--oisogs-mute);
 }
 
-@mixin card-background-mobile {
-  background: rgba(255, 255, 255, 0.07);
-  box-shadow:
-    0 4px 20px rgba(0, 0, 0, 0.2),
-    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: $card-radius;
-  padding: 0.5rem 2rem 2rem;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow:
-      0 8px 30px rgba(0, 0, 0, 0.3),
-      0 0 0 1px rgba(255, 255, 255, 0.15) inset;
-  }
+// Tronquage texte sur une ligne
+// Usage : titres d'albums, noms d'artistes dans des grilles
+@mixin oi-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
+// Chiffres tabulaires (alignement des colonnes de nombres)
+// Usage : compteurs, années, classements
+@mixin oi-tnum {
+  font-feature-settings: 'tnum';
+}
+
+// Séparateur horizontal éditorial
+// Usage : border-bottom entre items de liste
+@mixin oi-divider {
+  border-bottom: 1px solid var(--oisogs-rule);
+}
+
+// Rang / numéro de classement
+// Usage : 01, 02… dans les listes top artists, top styles, etc.
+@mixin oi-rank {
+  font-family: $oi-font-serif;
+  color: var(--oisogs-mute);
+  font-size: 1.3rem;
+  @include oi-tnum;
+}
+
+// Valeur accentuée (compteur album, count en fin de ligne)
+@mixin oi-count {
+  font-family: $oi-font-serif;
+  color: var(--oisogs-accent);
+  font-size: 1.6rem;
+  @include oi-tnum;
+}
+
+// Ligne de popup album (cover + info + meta)
+// Usage : StylesCloud, YearBarsBlock, LastAdded popup
+@mixin oi-popup-row {
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 14px 40px;
+  @include oi-divider;
+  transition: background 0.12s;
+
+  &:hover { background: var(--oisogs-bg-elev); }
+
+  @media (max-width: #{$oi-bp-mobile}) { padding: 12px 20px; }
+}
+
+// Cover carré dans les popups
+@mixin oi-popup-cover($size: 48px) {
+  width: $size;
+  height: $size;
+  object-fit: cover;
+  display: block;
+  background: var(--oisogs-bg-panel);
+}
+
+

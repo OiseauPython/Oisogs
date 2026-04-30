@@ -1,49 +1,32 @@
 <template>
-  <div class="bg"></div>
-  <NavBar />
-  <div class="wrapper">
-    <section class="dashboard">
-      <RouterView />
-    </section>
-  </div>
+  <div class="bg" />
+  <Topbar />
+  <main class="oi-main">
+    <RouterView />
+  </main>
+  <BottomTabBar />
+  <InstallPrompt />
 </template>
 
 <script setup>
 import { RouterView } from 'vue-router'
-import NavBar from './components/NavBar.vue'
+import Topbar from './components/shell/Topbar.vue'
+import BottomTabBar from './components/BottomTabBar.vue'
+import InstallPrompt from './components/InstallPrompt.vue'
 </script>
 
 <style lang="scss" scoped>
-// Les imports sont gérés par Vite dans vite.config.js
-
 .bg {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   z-index: -2;
+  background: var(--oisogs-bg);
 }
 
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  z-index: 1;
-  padding-top: 1rem;
-  padding-left: 3rem;
-  padding-right: 3rem;
-
-  .dashboard {
-    width: 100%;
-    flex-grow: 1;
-  }
-}
-
-@media (max-width: 768px) {
-  // Aligné avec le breakpoint de base.scss
-  .wrapper {
-    padding: 1rem 1rem 2rem 1rem;
+.oi-main {
+  @media (max-width: #{$oi-bp-mobile}) {
+    padding-bottom: calc(64px + env(safe-area-inset-bottom));
   }
 }
 </style>

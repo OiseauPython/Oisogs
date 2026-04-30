@@ -1,0 +1,177 @@
+{
+  "nav": {
+    "search": "Recherche",
+    "collection": "Collection",
+    "random": "Aléatoire",
+    "about": "À propos",
+    "reset": "Réinitialiser"
+  },
+  "search": {
+    "edition": "Édition №01 · 2026",
+    "title1": "Votre",
+    "title2": "collection,",
+    "title3": "cartographiée.",
+    "desc": "Entrez votre nom d'utilisateur Discogs. On va déballer chaque vinyle, mesurer sa décennie, peser ses styles, compter ses pays — et vous restituer le portrait statistique de votre étagère.",
+    "input_label": "Nom d'utilisateur Discogs",
+    "input_placeholder": "username",
+    "cta": "Charger la collection →",
+    "recent_label": "Recherches récentes",
+    "loading_kicker": "En cours",
+    "loading_text": "Lecture de {username}, vinyle après vinyle.",
+    "loading_meta": "Récupération API Discogs",
+    "loading_time": "~30 s",
+    "vinyl_waiting": "En attente",
+    "vinyl_playing": "Lecture en cours",
+    "vinyl_quote": "« Une étagère a toujours quelque chose à dire. »"
+  },
+  "home": {
+    "s1_kicker": "Section I — La Collection",
+    "s2_kicker": "Section II — Anatomie",
+    "s2_title": "Répartition par genre",
+    "s3_kicker": "Section III — Sous-genres",
+    "s3_title": "Le nuage des styles",
+    "s4_kicker": "Section IV — Décennies",
+    "s4_title": "Répartition par décennie",
+    "s5_kicker": "Section V — Artistes",
+    "s5_title": "Top artistes",
+    "s6_kicker": "Section VI — Récents",
+    "s6_title": "Derniers ajouts",
+    "s7_kicker": "Section VII — Formats",
+    "s7_title": "Répartition des supports",
+    "s8_kicker": "Section VIII — Chronologie",
+    "s8_title": "Ajouts par année",
+    "s9_kicker": "Section IX — Évolution",
+    "s9_title": "Par format dans le temps",
+    "s10_kicker": "Section X — Vocabulaire",
+    "s10_title": "Nuage des titres d'album",
+    "s2_dek": "Répartition par genre principal.",
+    "s3_dek": "{n} styles au total.",
+    "footer_tagline": "Oisogs · une lecture statistique de votre collection Discogs",
+    "footer_sync": "Données synchronisées le {date}"
+  },
+  "hero": {
+    "eyebrow": "Section I — La Collection",
+    "member_since": "Membre depuis {year}",
+    "albums_aria": "Nombre d'albums",
+    "albums_word": "albums",
+    "artists_meta": "· {n} artistes",
+    "stat_genre": "Genre dominant",
+    "stat_decade": "Décennie reine",
+    "stat_style": "Style #1",
+    "stat_artists": "Artistes",
+    "stat_artists_sub": "uniques",
+    "footer_spread": "répartis sur {n} artistes",
+    "footer_formats": "et {n} formats",
+    "footer_rate": "Cadence :",
+    "footer_per_month": "/ mois"
+  },
+  "funfacts": {
+    "stacked": "Empilés",
+    "stacked_sub": "hauteur de la pile",
+    "weight": "Poids total",
+    "weight_sub": "environ",
+    "albums": "Albums",
+    "albums_sub": "dans la collection",
+    "oldest": "+ ancien",
+    "oldest_sub": "première sortie",
+    "newest": "+ récent",
+    "newest_sub": "dernière sortie",
+    "rate": "Cadence",
+    "rate_unit": "/mois",
+    "rate_sub": "ajouts en moyenne",
+    "oldest_popup_kicker": "{year} · {n} album | {year} · {n} albums",
+    "newest_popup_kicker": "{year} · {n} album | {year} · {n} albums"
+  },
+  "decades": {
+    "sparkline_label": "Cadence d'ajout · 24 derniers mois",
+    "today": "auj."
+  },
+  "artists": {
+    "filter_placeholder": "Filtrer les artistes…"
+  },
+  "genres": {
+    "center_label": "Genres"
+  },
+  "styles": {
+    "top10_title": "Top 10 styles",
+    "cloud_note": "Taille proportionnelle au nombre d'albums · {n} styles au total",
+    "popup_kicker": "Style · {n} albums"
+  },
+  "years": {
+    "popup_kicker": "{year} · {n} albums ajoutés",
+    "peak": "Pic en {year} — {n} albums ajoutés cette année-là"
+  },
+  "wordcloud": {
+    "note": "{n} mots les plus fréquents dans les titres d'albums"
+  },
+  "lastadded": {
+    "see_more": "Voir les 50 derniers →",
+    "popup_kicker": "Derniers ajouts",
+    "popup_title": "50 derniers ajouts"
+  },
+  "randomize": {
+    "eyebrow": "Tirage aléatoire",
+    "eyebrow_count": "{n} albums disponibles",
+    "title": "Que vais-je écouter ?",
+    "desc": "Laissez Oisogs choisir un album dans votre collection au hasard.",
+    "selected_kicker": "Album sélectionné",
+    "stat_year": "Année",
+    "stat_label": "Label",
+    "stat_format": "Format",
+    "loading_kicker": "En cours…",
+    "loading_title": "Tirage en cours",
+    "redraw": "↺ Re-piocher",
+    "view_discogs": "Voir sur Discogs ↗",
+    "m1_kicker": "Mode 01",
+    "m1_title": "Tirage libre",
+    "m1_desc": "Pioche dans toute la collection, sans filtre.",
+    "m1_btn": "Piocher",
+    "m1_btn_loading": "Tirage…",
+    "m2_kicker": "Mode 02",
+    "m2_title": "Par genre",
+    "m2_desc": "Sélectionnez un genre puis lancez le tirage.",
+    "m2_btn": "Piocher dans ce genre",
+    "m2_btn_loading": "Tirage…",
+    "m3_kicker": "Mode 03",
+    "m3_title": "Par style",
+    "m3_desc": "Affinez au niveau du sous-genre.",
+    "m3_btn": "Piocher dans ce style",
+    "m3_btn_loading": "Tirage…",
+    "empty_kicker": "Collection introuvable",
+    "empty_text": "Recherchez une collection depuis la page {link} pour utiliser le tirage aléatoire.",
+    "empty_link": "Recherche",
+    "footer": "Oisogs · Tirage aléatoire",
+    "footer_last": "Dernier tirage · {title}"
+  },
+  "about": {
+    "kicker": "À propos — Oisogs",
+    "title": "Une lecture statistique de votre collection Discogs.",
+    "desc": "Oisogs branche votre profil Discogs et transforme vos albums en un tableau de bord vivant : genres, décennies, artistes fétiches, fun facts physiques, recherche unifiée — tout est calculé chez vous, dans le navigateur.",
+    "f1_kicker": "Fonctionnalité 01",
+    "f1_title": "Statistiques",
+    "f1_desc": "Genres, styles, décennies, formats, labels, pays, valeur totale — chaque dimension de votre étagère, mise en chiffres.",
+    "f2_kicker": "Fonctionnalité 02",
+    "f2_title": "Aléatoire",
+    "f2_desc": "Pioche un album au hasard quand vous ne savez plus quoi écouter. Filtré par genre, décennie ou format si vous le souhaitez.",
+    "f3_kicker": "Fonctionnalité 03",
+    "f3_title": "Recherche",
+    "f3_desc": "Chargez n'importe quelle collection publique Discogs en quelques secondes.",
+    "stack_label": "Sous le capot",
+    "no_tracking": "Pas de tracking",
+    "privacy_kicker": "Confidentialité",
+    "privacy_title": "Votre vie privée, d'abord.",
+    "privacy_desc": "Oisogs s'exécute entièrement dans votre navigateur. Aucune donnée n'est envoyée à un serveur tiers — ni votre nom d'utilisateur, ni votre collection. L'historique des recherches est stocké localement sur votre appareil et ne quitte jamais votre navigateur.",
+    "footer_legal": "Oisogs est un projet indépendant, non affilié à Discogs.",
+    "footer_credit": "Conçu et maintenu par OiseauPython."
+  },
+  "install": {
+    "title": "Installer Oisogs",
+    "sub_android": "Ajoutez l'app à votre écran d'accueil",
+    "sub_ios": "Appuyez sur ⬆ puis \"Sur l'écran d'accueil\"",
+    "btn_install": "Installer",
+    "btn_later": "Plus tard"
+  },
+  "popup": {
+    "close": "Fermer"
+  }
+}

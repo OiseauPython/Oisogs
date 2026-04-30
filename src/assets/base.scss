@@ -1,61 +1,68 @@
-// Les imports sont maintenant gérés par Vite dans vite.config.js
-
 @font-face {
-  font-family: 'Poppins'; // Le nom que tu veux utiliser
+  font-family: 'Poppins';
   src: url('@/assets/fonts/Poppins/Poppins-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap; // Meilleure performance de chargement
+  font-weight: normal; font-style: normal; font-display: swap;
 }
 @font-face {
-  font-family: 'Poppins-Bold'; // Le nom que tu veux utiliser
+  font-family: 'Poppins-Bold';
   src: url('@/assets/fonts/Poppins/Poppins-Bold.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap; // Meilleure performance de chargement
+  font-weight: normal; font-style: normal; font-display: swap;
 }
+@font-face {
+  font-family: 'Fraunces';
+  src: url('@/assets/fonts/Fraunces-Variable.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Fraunces';
+  src: url('@/assets/fonts/Fraunces-Italic-Variable.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@include oisogs-css-vars;
 
 html {
   font-size: 62.5%;
   min-height: 100vh;
+  overscroll-behavior: none;
 }
 
 body {
-  margin: 0 0 3rem;
-  color: $color-text-light;
-  position: relative;
-  transition:
-    color 0.5s,
-    background-color 0.5s;
-  font-family:
-    Poppins,
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Fira Sans',
-    'Droid Sans',
-    'Helvetica Neue',
-    sans-serif;
-  font-size: 1.6rem;
+  margin: 0;
+  background: var(--oisogs-bg);
+  color: var(--oisogs-ink);
+  font-family: var(--oisogs-font-sans);
+  font-size: 1.4rem;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  @media (max-width: 768px) {
-    margin: 0 0 1rem;
-  }
+  transition: background-color 0.3s, color 0.3s;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.oi-logo-light { display: none; }
+.oi-logo-dark  { display: block; }
+
+@media (prefers-color-scheme: light) {
+  .oi-logo-light { display: block; }
+  .oi-logo-dark  { display: none; }
 }
 
 .bg {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
   z-index: -1;
-  background: $background;
+  background: var(--oisogs-bg);
 }
