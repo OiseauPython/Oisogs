@@ -13,6 +13,7 @@
           :to="item.path"
           class="oi-topbar__nav-item"
           :class="{ '--active': isActive(item), '--disabled': item.requiresCollection && !hasCollection }"
+          :aria-disabled="item.requiresCollection && !hasCollection ? 'true' : undefined"
           @click.prevent="navigate(item)"
         >
           {{ item.label }}

@@ -6,6 +6,7 @@
       :to="tab.path"
       class="oi-tabbar__tab"
       :class="{ '--active': isActive(tab), '--disabled': tab.requiresCollection && !hasCollection }"
+      :aria-disabled="tab.requiresCollection && !hasCollection ? 'true' : undefined"
       @click.prevent="navigate(tab)"
     >
       <div class="oi-tabbar__indicator" />

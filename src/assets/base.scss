@@ -37,6 +37,13 @@ body {
   box-sizing: border-box;
 }
 
+/* Prevent iOS Safari auto-zoom on input focus without disabling user zoom */
+@media screen and (max-width: 768px) {
+  input, select, textarea {
+    font-size: max(16px, 1em) !important;
+  }
+}
+
 a {
   color: inherit;
   text-decoration: none;
