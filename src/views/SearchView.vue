@@ -17,6 +17,12 @@
             {{ t('search.cta') }}
           </button>
         </form>
+        <div v-if="store.error" class="error">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          <span class="error__message">{{ t(`errors.${store.error}`) }}</span>
+        </div>
         <div v-if="recentSearches.length > 0" class="recent-searches">
           <p class="recent-searches__label">{{ t('search.recent_label') }}</p>
           <button
@@ -31,23 +37,17 @@
           </button>
         </div>
       </div>
-      <div v-if="store.isLoading || store.error" class="infos-container" :class="{ '--error': store.error }">
-        <template v-if="store.isLoading">
-          <div class="info">
-            <p class="info__kicker">{{ t('search.loading_kicker') }}</p>
-            <p class="info__text">{{ t('search.loading_text', { username: `@${searchValue}` }) }}</p>
-          </div>
-          <div class="loading-track">
-            <div class="loading_bar" :style="{ width: (store.loadingProgress || 0) + '%' }"></div>
-          </div>
-          <div class="loading-meta">
-            <span>{{ t('search.loading_meta') }}</span>
-            <span>{{ t('search.loading_time') }}</span>
-          </div>
-        </template>
-        <div v-if="store.error" class="error">
-          <span>&#10005;</span>
-          <div class="error-message">{{ t(`errors.${store.error}`) }}</div>
+      <div v-if="store.isLoading" class="infos-container">
+        <div class="info">
+          <p class="info__kicker">{{ t('search.loading_kicker') }}</p>
+          <p class="info__text">{{ t('search.loading_text', { username: `@${searchValue}` }) }}</p>
+        </div>
+        <div class="loading-track">
+          <div class="loading_bar" :style="{ width: (store.loadingProgress || 0) + '%' }"></div>
+        </div>
+        <div class="loading-meta">
+          <span>{{ t('search.loading_meta') }}</span>
+          <span>{{ t('search.loading_time') }}</span>
         </div>
       </div>
     </div>
@@ -146,6 +146,7 @@ const handleSearch = async () => {
   }
   lastSearchTime.value = now
   store.error = null
+  window.scrollTo({ top: 0, behavior: 'instant' })
   const username = searchValue.value.trim().toLowerCase()
   await store.fetchUserProfile(username)
   await store.fetchCollection(username)
@@ -260,31 +261,34 @@ const handleSearch = async () => {
     letter-spacing: 0.05em;
   }
 
+  .error {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border-left: 2px solid var(--oisogs-danger, #c0392b);
+    background: var(--oisogs-bg-elev);
+    margin-top: 8px;
+
+    svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      color: var(--oisogs-danger, #c0392b);
+      opacity: 0.8;
+    }
+
+    &__message {
+      font-family: $oi-font-sans;
+      font-size: 1.3rem;
+      color: var(--oisogs-ink-soft);
+      letter-spacing: 0.01em;
+    }
+  }
+
   .infos-container {
     width: 100%;
     margin-top: 1rem;
-
-    &.--error {
-      border: rgba(221, 37, 37, 0.5) dashed 2px;
-      position: absolute;
-      top: calc(50% + 2rem);
-    }
-
-    .error {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 1rem;
-    }
-
-    .error {
-      color: rgb(221, 37, 37);
-
-      span {
-        color: rgb(200, 200, 200);
-        background-color: rgb(221, 37, 37);
-      }
-    }
 
     .info {
       margin-bottom: 24px;
